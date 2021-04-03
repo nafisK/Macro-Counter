@@ -66,7 +66,6 @@ Macro Counter: Helps users track their daily calories of protein, carbs, fats an
    * [list screen navigation here]
 
 ## Wireframes
-[Add picture of your hand sketched wireframes in this section]
 <img src="https://github.com/Codepath-Group-7/Macro_Counter/blob/master/Wireframe.png" width=600>
 <img src="https://github.com/Codepath-Group-7/Macro_Counter/blob/master/wireframeLoginScreens.PNG" width=600>
 
@@ -81,5 +80,4 @@ Macro Counter: Helps users track their daily calories of protein, carbs, fats an
 ### Networking
 - [Add list of network requests by screen ]
 - [Create basic snippets for each Parse network request]
-- [OPTIONAL: List endpoints if using existing API such as Yelp]
 - Using myfitnesspal API: https://myfitnesspalapi.com/
