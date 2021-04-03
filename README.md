@@ -62,10 +62,8 @@ Macro Counter: Helps users track their daily calories of protein, carbs, fats an
 
 * Login
    * [list screen navigation here]
-   * ...
 * [list second screen here]
    * [list screen navigation here]
-   * ...
 
 ## Wireframes
 [Add picture of your hand sketched wireframes in this section]
