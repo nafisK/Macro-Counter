@@ -67,7 +67,8 @@ Macro Counter: Helps users track their daily calories of protein, carbs, fats an
 
 ## Wireframes
 [Add picture of your hand sketched wireframes in this section]
-<img src="YOUR_WIREFRAME_IMAGE_URL" width=600>
+<img src="https://github.com/Codepath-Group-7/Macro_Counter/blob/master/Wireframe.png" width=600>
+<img src="https://github.com/Codepath-Group-7/Macro_Counter/blob/master/wireframeLoginScreens.PNG" width=600>
 
 ### [BONUS] Digital Wireframes & Mockups
 
