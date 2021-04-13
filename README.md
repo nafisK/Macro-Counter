@@ -69,14 +69,46 @@ Macro Counter: Helps users track their daily calories of protein, carbs, fats an
 <img src="https://github.com/Codepath-Group-7/Macro_Counter/blob/master/Wireframe.png" width=600>
 <img src="https://github.com/Codepath-Group-7/Macro_Counter/blob/master/wireframeLoginScreens.PNG" width=600>
 
-### [BONUS] Digital Wireframes & Mockups
-
-### [BONUS] Interactive Prototype
-
 ## Schema 
-[This section will be completed in Unit 9]
 ### Models
-[Add table of models]
+**Model: Post**
+
+| Property  | Type            | Description                                    |
+|-----------|-----------------|------------------------------------------------|
+| postId    | String          | unique id for the user post (default field)    |
+| author    | Pointer to User | image author                                  |
+| image     | File            | image that user posts                          |
+| caption   | String          | caption by author                              |
+| createdAt | DateTime        | date when post is created (default field)      |
+
+
+**Model: Profile**
+| property   | Type   | Description                |
+|------------|--------|----------------------------|
+| userId     | String | userId used for profileId  |
+| image      | File   | Image for profile picture  |
+| bio        | String | Used as a bio for the user |
+| username   | String | User's username            |
+| weight     | int    | User's weight              |
+| height     | int    | User's height              |
+| weightGoal | int    | User's weight goal         |
+
+**Model: Food item** (NOTE: only calories and name will show up in search results)
+| property      | Type | Description                 |
+|---------------|------|-----------------------------|
+| foodId        | int  | unique id for each food     |
+| name          | String  | name of food             |
+| calories      | int  | calories each food contains |
+| proteins      | int  | proteins each food contains |
+| carbohydrates | int  | carbs each food contains    |
+| fats          | int  | fats each food contains     |
+
+
+| property         | Type                | Description                        |
+|------------------|---------------------|------------------------------------|
+| Calorie Goal     | int                 | Calorie Goal for the User          |
+| Calories Eaten   | int                 | Total Calories eaten today         |
+| Food Items Eaten | Array of Food Items | List of each food item eaten today |
 ### Networking
 - [Add list of network requests by screen ]
 - [Create basic snippets for each Parse network request]
