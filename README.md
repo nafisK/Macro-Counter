@@ -110,6 +110,100 @@ Macro Counter: Helps users track their daily calories of protein, carbs, fats an
 | Calories Eaten   | int                 | Total Calories eaten today         |
 | Food Items Eaten | Array of Food Items | List of each food item eaten today |
 ### Networking
-- [Add list of network requests by screen ]
-- [Create basic snippets for each Parse network request]
+#### List of network requests by screen
+   - Home Feed Screen
+      - (Read/GET) Query all posts
+          ```swift
+          private void queryPosts() {
+              ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
+              query.include(Post.KEY_USER);
+              query.setLimit(20); // if we want to set limit
+              query.addDescendingOrder(KEY_CREATED_KEY);
+              query.findInBackground(new FindCallback<Post>() {
+                  @Override
+                  public void done(List<Post> posts, ParseException e) {
+                      if (e != null) {
+                          Log.e(TAG, "Issue with getting posts", e);
+                          return;
+                      }
+                      for (Post post : posts) {
+                          Log.i(TAG, "POST: " + post.getDescription() + ", username: " + post.getUser().getUsername());
+                      }
+                      allPosts.addAll(posts);
+                      adapter.notifyDataSetChanged();
+                  }
+              });
+          }
+          ```
+   - Login Screen
+      - (Read/Validate) Query user objects with user input id/pass to check is valid
+          ```swift
+              private void loginUser(String username, String password) {
+                  Log.i(TAG, "Attempting to login user " + username);
+                  ParseUser.logInInBackground(username, password, new LogInCallback() {
+                      @Override
+                      public void done(ParseUser user, ParseException e) {
+                          if (e != null){
+                              Log.e(TAG, "Issue with login", e);
+                              return;
+                          }
+                          goMainActivity();
+                          Toast.makeText(LoginActivity.this, "Success!", Toast.LENGTH_SHORT).show();
+                      }
+                  });
+              }
+          ```
+      - (Create/POST) Create a new account
+          ```swift
+              private void signUpUser(String username, String password) {
+                  Log.i(TAG, "Attempting to login user " + username);
+
+                  // Create the ParseUser
+                  ParseUser user = new ParseUser();
+                  // Set core properties
+                  user.setUsername(username);
+                  user.setPassword(password);
+
+                  user.signUpInBackground(new SignUpCallback() {
+                      public void done(ParseException e) {
+                          if (e == null) {
+                              // Hooray! Let them use the app now.
+                              goMainActivity();
+                              Toast.makeText(LoginActivity.this, "Success!", Toast.LENGTH_SHORT).show();
+                          } else {
+                              // Sign up didn't succeed. Look at the ParseException
+                              // to figure out what went wrong
+                              Log.e(TAG, "Issue with login", e);
+                              return;
+                          }
+                      }
+                  });
+              }
+          ```
+   - Detail Screen
+      - (Read/GET) Query selected object’s nutritional value
+          ```swift
+          private void queryInfo() {
+              ParseQuery<Info> query = ParseQuery.getQuery(Info.class);
+              query.include(Info.KEY_NAME);
+              query.addDescendingOrder(KEY_ID_KEY);
+              query.findInBackground(new FindCallback<Info>() {
+                  @Override
+                  public void done(List<Info> infos, ParseException e) {
+                      if (e != null) {
+                          Log.e(TAG, "Issue with getting information", e);
+                          return;
+                      }
+                      for (Info info : infos) {
+                          Log.i(TAG, "INFO: " + infos.getDescription() + ", Calories: " + info.getInfo().getCalories());
+                      }
+                      allInfos.addAll(infos);
+                      adapter.notifyDataSetChanged();
+                  }
+              });
+          }
+          ```
+
+
+
 - Using myfitnesspal API: https://myfitnesspalapi.com/
