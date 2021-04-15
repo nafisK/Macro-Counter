@@ -203,6 +203,51 @@ Macro Counter: Helps users track their daily calories of protein, carbs, fats an
               });
           }
           ```
+   - Search Screen
+      - (Read/Get) Query all food items
+          ```swift
+          protected void queryFoods() {
+              ParseQuery<Food> query = ParseQuery.getQuery(Food.class);
+              query.include(Food.KEY_foodName);
+              query.setLimit(20);
+              query.addDescendingOrder(Food.KEY_CREATED_KEY);
+              query.findInBackground(new FindCallback<Food>() {
+                  @Override
+                  public void done(List<Food> foods, ParseException e) {
+                      if (e != null) {
+                          Log.e(TAG, "Issue with getting foods", e);
+                          return;
+                      }
+                      for (Food food : foods) {
+                          Log.i(TAG, info.getInfo().getCalories());
+                      }
+                      allFoods.addAll(foods);
+                      adapter.notifyDataSetChanged();
+                  }
+          ```
+   - Profile Screen
+      - (Read/Get) Query get user's last 20 posts
+          ```swift
+          protected void queryPosts() {
+                  ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
+                  query.include(Post.KEY_USER);
+                  query.whereEqualTo(Post.KEY_USER, ParseUser.getCurrentUser());
+                  query.setLimit(20);
+                  query.addDescendingOrder(Post.KEY_CREATED_KEY);
+                  query.findInBackground(new FindCallback<Post>() {
+                      @Override
+                      public void done(List<Post> posts, ParseException e) {
+                          if (e != null) {
+                              Log.e(TAG, "Issue with getting posts", e);
+                              return;
+                          }
+                          for (Post post : posts) {
+                              Log.i(TAG, "Post: " + post.getDescription() + ", username: " + post.getUser().getUsername());
+                          }
+                          allPosts.addAll(posts);
+                          adapter.notifyDataSetChanged();
+                      }
+          ```
 
 
 
