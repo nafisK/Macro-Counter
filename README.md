@@ -2,7 +2,7 @@
 
 **Macro_Counter** will help users track their daily calories of protein, carbs, fats and other micro nutrients
 
-## User Stories
+## Week 10 - User Stories
 
 The following **required** functionality is completed:
 
