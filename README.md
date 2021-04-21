@@ -1,4 +1,36 @@
-# Macro_Counter
+# Group Project - *Macro_Counter*
+
+**Macro_Counter** will help users track their daily calories of protein, carbs, fats and other micro nutrients
+
+## User Stories
+
+The following **required** functionality is completed:
+
+- [x] Implement Fragment System & Create Fragments.
+- [x] Create basic XML files for each fragment/Activity.
+- [x] Implement Back4App Login Functionality.
+
+The following **optional** features are implemented:
+
+- [] Application of Food Database API. 
+
+
+## Video Walkthrough
+
+Here's a walkthrough of implemented user stories:
+
+<img src="" width=250><br>
+
+GIF created with [LiceCap](http://www.cockos.com/licecap/).
+
+## Notes
+
+Describe any challenges encountered while building the app.
+
+## Open-source libraries used
+
+- [Android Async HTTP](https://github.com/codepath/CPAsyncHttpClient) - Simple asynchronous HTTP requests with JSON parsing
+- [Glide](https://github.com/bumptech/glide) - Image loading and caching library for Android
 
 ## Table of Contents
 1. [Overview](#Overview)
@@ -7,8 +39,6 @@
 2. [Schema](#Schema)
 
 ## Overview
-### Description
-Macro Counter: Helps users track their daily calories of protein, carbs, fats and other micro nutrients
 
 ### App Evaluation
 [Evaluation of your app across the following attributes]
@@ -138,47 +168,47 @@ Macro Counter: Helps users track their daily calories of protein, carbs, fats an
    - Login Screen
       - (Read/Validate) Query user objects with user input id/pass to check is valid
           ```swift
-              private void loginUser(String username, String password) {
-                  Log.i(TAG, "Attempting to login user " + username);
-                  ParseUser.logInInBackground(username, password, new LogInCallback() {
-                      @Override
-                      public void done(ParseUser user, ParseException e) {
-                          if (e != null){
-                              Log.e(TAG, "Issue with login", e);
-                              return;
-                          }
-                          goMainActivity();
-                          Toast.makeText(LoginActivity.this, "Success!", Toast.LENGTH_SHORT).show();
+          private void loginUser(String username, String password) {
+              Log.i(TAG, "Attempting to login user " + username);
+              ParseUser.logInInBackground(username, password, new LogInCallback() {
+                  @Override
+                  public void done(ParseUser user, ParseException e) {
+                      if (e != null){
+                          Log.e(TAG, "Issue with login", e);
+                          return;
                       }
-                  });
-              }
+                      goMainActivity();
+                      Toast.makeText(LoginActivity.this, "Success!", Toast.LENGTH_SHORT).show();
+                  }
+              });
+          }
           ```
       - (Create/POST) Create a new account
           ```swift
-              private void signUpUser(String username, String password) {
-                  Log.i(TAG, "Attempting to login user " + username);
+          private void signUpUser(String username, String password) {
+              Log.i(TAG, "Attempting to login user " + username);
 
-                  // Create the ParseUser
-                  ParseUser user = new ParseUser();
-                  // Set core properties
-                  user.setUsername(username);
-                  user.setPassword(password);
+              // Create the ParseUser
+              ParseUser user = new ParseUser();
+              // Set core properties
+              user.setUsername(username);
+              user.setPassword(password);
 
-                  user.signUpInBackground(new SignUpCallback() {
-                      public void done(ParseException e) {
-                          if (e == null) {
-                              // Hooray! Let them use the app now.
-                              goMainActivity();
-                              Toast.makeText(LoginActivity.this, "Success!", Toast.LENGTH_SHORT).show();
-                          } else {
-                              // Sign up didn't succeed. Look at the ParseException
-                              // to figure out what went wrong
-                              Log.e(TAG, "Issue with login", e);
-                              return;
-                          }
+              user.signUpInBackground(new SignUpCallback() {
+                  public void done(ParseException e) {
+                      if (e == null) {
+                          // Hooray! Let them use the app now.
+                          goMainActivity();
+                          Toast.makeText(LoginActivity.this, "Success!", Toast.LENGTH_SHORT).show();
+                      } else {
+                          // Sign up didn't succeed. Look at the ParseException
+                          // to figure out what went wrong
+                          Log.e(TAG, "Issue with login", e);
+                          return;
                       }
-                  });
-              }
+                  }
+              });
+          }
           ```
    - Detail Screen
       - (Read/GET) Query selected object’s nutritional value
@@ -251,4 +281,4 @@ Macro Counter: Helps users track their daily calories of protein, carbs, fats an
 
 
 
-- Using myfitnesspal API: https://myfitnesspalapi.com/
+- Using Food Database API: https://developer.edamam.com/food-database-api
