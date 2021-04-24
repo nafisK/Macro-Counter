@@ -33,20 +33,36 @@ public class LoginActivity extends AppCompatActivity {
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
+        DAOUser dao = new DAOUser();
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.i(TAG, "onClick login button");
-                String username = etUsername.getText().toString();
-                String password = etPassword.getText().toString();
-                loginUser(username, password);
+
+                User user = new User(
+                        etUsername.getText().toString(),
+                        etPassword.getText().toString());
+                dao.add(user).addOnSuccessListener(success ->{
+                    goMainActivity();
+                    Toast.makeText(LoginActivity.this, "Success on Login!", Toast.LENGTH_SHORT).show();
+                }).addOnFailureListener(er-> {
+                    Toast.makeText(LoginActivity.this, "Issue with login", Toast.LENGTH_SHORT).show();
+                });
+
             }
         });
 
 
+
+    }
+    private void goMainActivity() {
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+        finish();
     }
 
+    /*
     private void loginUser(String username, String password) {
         Log.i(TAG, "Attempting to login user " + username);
         // TODO: navigate to the main activity if the user has signed in properly
@@ -65,9 +81,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void goMainActivity() {
-        Intent i = new Intent(this, MainActivity.class);
-        startActivity(i);
-        finish();
-    }
+     */
+
+
 }

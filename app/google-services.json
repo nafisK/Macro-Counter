@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1044197700118",
+    "project_id": "macrocounter-24f3d",
+    "storage_bucket": "macrocounter-24f3d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1044197700118:android:2265ff0876a26fd9dbbb37",
+        "android_client_info": {
+          "package_name": "com.example.macro_counter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1044197700118-obhp9bhp1ueuv9h974sshr610glm1q3m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1ay3Nxhl_6Rmvdv2IntWUQ72SnR5vy9M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1044197700118-obhp9bhp1ueuv9h974sshr610glm1q3m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
