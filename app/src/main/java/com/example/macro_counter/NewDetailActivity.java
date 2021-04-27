@@ -14,6 +14,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -23,13 +24,15 @@ public class NewDetailActivity extends AppCompatActivity implements View.OnClick
     private Button btnCancel, btnApply;
 
     private DatabaseReference mDatabase;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_detail);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference("Foods");
 
         etItemName = findViewById(R.id.etItemName);
         etCalories = findViewById(R.id.etCalories);
@@ -99,7 +102,30 @@ public class NewDetailActivity extends AppCompatActivity implements View.OnClick
         }
 
         Food food = new Food(itemName, calories, proteinCnt, fat, cholesterol, fiber);
-        mDatabase.child("Foods").child(itemId).setValue(food);
+//        mDatabase.child("Foods").child(itemId).setValue(food);
+//        startActivity(new Intent(this, MainActivity.class));
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            // User is signed in
+            FirebaseDatabase.getInstance().getReference("Foods")
+                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                    .setValue(food).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if(task.isSuccessful()){
+                        Toast.makeText(NewDetailActivity.this, "Food has been registered Successfully!", Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(NewDetailActivity.this, MainActivity.class));
+                    } else {
+                        Toast.makeText(NewDetailActivity.this, "Failed to register! Try Again!", Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+        } else {
+            // No user is signed in
+            Toast.makeText(NewDetailActivity.this, "Not Signed in! Please sign in!", Toast.LENGTH_LONG).show();
+            startActivity(new Intent(NewDetailActivity.this, LoginActivity.class));
+        }
+
     }
 
 
