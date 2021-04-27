@@ -1,5 +1,6 @@
 package com.example.macro_counter.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,10 +10,15 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+import com.example.macro_counter.MainActivity;
+import com.example.macro_counter.NewDetailActivity;
 import com.example.macro_counter.R;
 
-public class SearchFragment extends Fragment {
+public class SearchFragment extends Fragment implements View.OnClickListener {
+
+    private Button btnCustomItem;
 
     public SearchFragment() {
         // Required empty public constructor
@@ -32,5 +38,19 @@ public class SearchFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         // Setup any handles to view objects here
         // EditText etFoo = (EditText) view.findViewById(R.id.etFoo);
+
+
+        btnCustomItem = view.findViewById(R.id.btnCustomItem);
+        btnCustomItem.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.btnCustomItem:
+                Intent intent = new Intent(getActivity(), NewDetailActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 }

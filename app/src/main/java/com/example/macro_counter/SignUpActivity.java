@@ -7,9 +7,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,9 +25,11 @@ import com.google.firebase.database.FirebaseDatabase;
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView banner;
-    private EditText etEmail, etPassword, etName, etWeight, etHeightCm, etHeightFt, etHeightIn;
+    private EditText etEmail, etPassword, etName, etAge, etWeight, etHeightCm, etHeightFt, etHeightIn;
     private Button btnSignUp;
     private ProgressBar progressBar;
+    private Spinner spinActivity;
+    private String activity;
 
     private FirebaseAuth mAuth;
 
@@ -44,12 +49,47 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         etName = findViewById(R.id.etName);
+        etAge = findViewById(R.id.etAge);
         etWeight = findViewById(R.id.etWeight);
         etHeightCm = findViewById(R.id.etHeightCm);
         etHeightFt = findViewById(R.id.etHeightFt);
         etHeightIn = findViewById(R.id.etHeightIn);
 
         progressBar = findViewById(R.id.progressBar);
+        spinActivity = findViewById(R.id.spinActivity);
+
+        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(SignUpActivity.this,
+                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.spinActivityString));
+        myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinActivity.setAdapter(myAdapter);
+        spinActivity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        activity = "sedentary";
+                        break;
+                    case 1:
+                        activity = "light";
+                        break;
+                    case 2:
+                        activity = "moderate";
+                        break;
+                    case 3:
+                        activity = "hard";
+                        break;
+                    case 4:
+                        activity = "very hard";
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     @Override
@@ -68,6 +108,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         String email = etEmail.getText().toString().trim();
         String password = etPassword.getText().toString().trim();
         String name = etName.getText().toString().trim();
+        String age = etAge.getText().toString().trim();
+//        String activity = spinActivity.toString();
         String weight = etWeight.getText().toString().trim();
         String heightCm = etHeightCm.getText().toString().trim();
         String heightFt = etHeightFt.getText().toString().trim();
@@ -103,8 +145,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             return;
         }
 
-        if(name.isEmpty()){
-            etName.setError("Name is required!");
+        if(age.isEmpty()){
+            etName.setError("Age is required!");
             etName.requestFocus();
             return;
         }
@@ -121,7 +163,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            User user = new User(email, name, password, weight, heightFt, heightIn, heightCm);
+                            User user = new User(email, name, password, weight, heightFt, heightIn, heightCm, age, activity);
 
                             FirebaseDatabase.getInstance().getReference("Users")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())

@@ -13,7 +13,26 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvFoods"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="397dp"
         android:padding="8dp" />
+
+    <LinearLayout
+        android:id="@+id/linearLayoutbtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal">
+
+
+        <Button
+            android:id="@+id/btnCustomItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:layout_weight="1"
+            android:text="Custom Item" />
+
+    </LinearLayout>
 
 </LinearLayout>
