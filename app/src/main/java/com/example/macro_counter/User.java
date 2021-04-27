@@ -2,24 +2,36 @@ package com.example.macro_counter;
 
 public class User {
 
+    public String email;
     public String name;
     public String password;
-    public double weight;
-    public int heightFeet;
-    public int heightInch;
-    public int heightCm;
+    public String weight;
+    public String heightFeet;
+    public String heightInch;
+    public String heightCm;
 
     // Default constructor required for calls to
     // DataSnapshot.getValue(User.class)
     public User() {
     }
 
-    public User(String name, String password){
-        this.name = name;
+    public User(String email, String password){
+        this.email = email;
         this.password = password;
     }
 
-    public User(String name, String password, double weight, int heightFeet, int heightInch) {
+    public User(String email, String name, String password, String weight, String heightFeet, String heightInch, String heightCm) {
+        this.email = email;
+        this.name = name;
+        this.password = password;
+        this.weight = weight;
+        this.heightFeet = heightFeet;
+        this.heightInch = heightInch;
+        this.heightCm = heightCm;
+    }
+
+    public User(String email, String name, String password, String weight, String heightFeet, String heightInch) {
+        this.email = email;
         this.name = name;
         this.password = password;
         this.weight = weight;
@@ -27,11 +39,20 @@ public class User {
         this.heightInch = heightInch;
     }
 
-    public User(String name, String password, double weight, int heightCm) {
+    public User(String email, String name, String password, String weight, String heightCm) {
+        this.email = email;
         this.name = name;
         this.password = password;
         this.weight = weight;
         this.heightCm = heightCm;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getName() {
@@ -50,35 +71,35 @@ public class User {
         this.password = password;
     }
 
-    public double getWeight() {
+    public String getWeight() {
         return weight;
     }
 
-    public void setWeight(double weight) {
+    public void setWeight(String weight) {
         this.weight = weight;
     }
 
-    public int getHeightFeet() {
+    public String getHeightFeet() {
         return heightFeet;
     }
 
-    public void setHeightFeet(int heightFeet) {
+    public void setHeightFeet(String heightFeet) {
         this.heightFeet = heightFeet;
     }
 
-    public int getHeightInch() {
+    public String getHeightInch() {
         return heightInch;
     }
 
-    public void setHeightInch(int heightInch) {
+    public void setHeightInch(String heightInch) {
         this.heightInch = heightInch;
     }
 
-    public int getHeightCm() {
+    public String getHeightCm() {
         return heightCm;
     }
 
-    public void setHeightCm(int heightCm) {
+    public void setHeightCm(String heightCm) {
         this.heightCm = heightCm;
     }
 }
