@@ -1,22 +1,29 @@
 package com.example.macro_counter;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 public class NewDetailActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -25,6 +32,13 @@ public class NewDetailActivity extends AppCompatActivity implements View.OnClick
 
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
+
+    private Map mapTimeStamp = new HashMap();
+    private Map mapUser = new HashMap();
+
+
+    private String TAG = "NewDetailActivity";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,13 +116,34 @@ public class NewDetailActivity extends AppCompatActivity implements View.OnClick
         }
 
         Food food = new Food(itemName, calories, proteinCnt, fat, cholesterol, fiber);
-//        mDatabase.child("Foods").child(itemId).setValue(food);
-//        startActivity(new Intent(this, MainActivity.class));
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        String foodPostKey = database.getReference("FoodPost").push().getKey();
+        String foodKey = database.getReference("Foods").push().getKey();
+
         if (user != null) {
             // User is signed in
+
+            mapTimeStamp.put("timestamp", ServerValue.TIMESTAMP);
+            mapUser.put("user email", user.getEmail());
+
             FirebaseDatabase.getInstance().getReference("Foods")
-                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                    .child(foodKey)
+                    .setValue(food);
+
+            FirebaseDatabase.getInstance().getReference("FoodPost")
+                    .child(foodPostKey)
+                    .child("user")
+                    .setValue(mapUser);
+
+            FirebaseDatabase.getInstance().getReference("FoodPost")
+                    .child(foodPostKey)
+                    .child("time")
+                    .setValue(mapTimeStamp);
+
+            FirebaseDatabase.getInstance().getReference("FoodPost")
+                    .child(foodPostKey)
+                    .child("food")
                     .setValue(food).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
@@ -129,4 +164,19 @@ public class NewDetailActivity extends AppCompatActivity implements View.OnClick
     }
 
 
+    public static String getTimeDate(Map<String, String> timestamp){
+        try{
+            Date netDate = (new Date(String.valueOf(timestamp)));
+            SimpleDateFormat sfd = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault());
+            return sfd.format(netDate);
+        } catch(Exception e) {
+            return "date";
+        }
+    }
+    public String getDatafTimeStamp(long timestamp){
+        java.util.Date time=new java.util.Date(timestamp*1000);
+        SimpleDateFormat pre = new SimpleDateFormat("EEE MM dd HH:mm:ss zzz yyyy");
+        //Hear Define your returning date formate
+        return pre.format(time);
+    }
 }
