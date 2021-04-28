@@ -21,6 +21,7 @@ import com.google.firebase.database.ServerValue;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
@@ -32,7 +33,12 @@ public class NewDetailActivity extends AppCompatActivity implements View.OnClick
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
 
+    private Map mapTimeStamp = new HashMap();
+    private Map mapUser = new HashMap();
+
+
     private String TAG = "NewDetailActivity";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,31 +116,33 @@ public class NewDetailActivity extends AppCompatActivity implements View.OnClick
         }
 
         Food food = new Food(itemName, calories, proteinCnt, fat, cholesterol, fiber);
-//        mDatabase.child("Foods").child(itemId).setValue(food);
-//        startActivity(new Intent(this, MainActivity.class));
-//        Food food = new Food(itemName, calories, proteinCnt, fat, cholesterol, fiber);
-//        mDatabase.child("Foods").child(itemId).setValue(food);
-//        startActivity(new Intent(this, MainActivity.class));
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        FoodPost foodpost = new FoodPost(user, food);
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        String foodPostKey = database.getReference("FoodPost").push().getKey();
+        String foodKey = database.getReference("Foods").push().getKey();
+
         if (user != null) {
             // User is signed in
+
+            mapTimeStamp.put("timestamp", ServerValue.TIMESTAMP);
+            mapUser.put("user email", user.getEmail());
+
             FirebaseDatabase.getInstance().getReference("Foods")
-                    .child("food")
+                    .child(foodKey)
                     .setValue(food);
 
             FirebaseDatabase.getInstance().getReference("FoodPost")
-                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                    .child(foodPostKey)
                     .child("user")
-                    .setValue(user.getEmail());
+                    .setValue(mapUser);
 
             FirebaseDatabase.getInstance().getReference("FoodPost")
-                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                    .child(foodPostKey)
                     .child("time")
-                    .setValue(ServerValue.TIMESTAMP);
+                    .setValue(mapTimeStamp);
 
             FirebaseDatabase.getInstance().getReference("FoodPost")
-                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                    .child(foodPostKey)
                     .child("food")
                     .setValue(food).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
@@ -164,5 +172,11 @@ public class NewDetailActivity extends AppCompatActivity implements View.OnClick
         } catch(Exception e) {
             return "date";
         }
+    }
+    public String getDatafTimeStamp(long timestamp){
+        java.util.Date time=new java.util.Date(timestamp*1000);
+        SimpleDateFormat pre = new SimpleDateFormat("EEE MM dd HH:mm:ss zzz yyyy");
+        //Hear Define your returning date formate
+        return pre.format(time);
     }
 }
