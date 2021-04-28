@@ -9,6 +9,8 @@ public class User {
     public String heightFeet;
     public String heightInch;
     public String heightCm;
+    public String age;
+    public String activity;
 
     // Default constructor required for calls to
     // DataSnapshot.getValue(User.class)
@@ -20,7 +22,7 @@ public class User {
         this.password = password;
     }
 
-    public User(String email, String name, String password, String weight, String heightFeet, String heightInch, String heightCm) {
+    public User(String email, String name, String password, String weight, String heightFeet, String heightInch, String heightCm, String age, String activity) {
         this.email = email;
         this.name = name;
         this.password = password;
@@ -28,23 +30,24 @@ public class User {
         this.heightFeet = heightFeet;
         this.heightInch = heightInch;
         this.heightCm = heightCm;
+        this.age = age;
+        this.activity = activity;
     }
 
-    public User(String email, String name, String password, String weight, String heightFeet, String heightInch) {
-        this.email = email;
-        this.name = name;
-        this.password = password;
-        this.weight = weight;
-        this.heightFeet = heightFeet;
-        this.heightInch = heightInch;
+    public String getAge() {
+        return age;
     }
 
-    public User(String email, String name, String password, String weight, String heightCm) {
-        this.email = email;
-        this.name = name;
-        this.password = password;
-        this.weight = weight;
-        this.heightCm = heightCm;
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+    public String getActivity() {
+        return activity;
+    }
+
+    public void setActivity(String activity) {
+        this.activity = activity;
     }
 
     public String getEmail() {
