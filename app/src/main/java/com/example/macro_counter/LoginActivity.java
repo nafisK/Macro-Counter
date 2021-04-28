@@ -27,7 +27,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText etEmail;
     private EditText etPassword;
     private Button btnLogin;
-    private TextView tvRegister;
+    private TextView tvRegister, tvForgotPassword;
 
     private FirebaseAuth mAuth;
     private ProgressBar progressBar;
@@ -45,6 +45,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         tvRegister = findViewById(R.id.tvRegister);
         tvRegister.setOnClickListener(this);
 
+        tvForgotPassword = findViewById(R.id.tvForgotPassword);
+        tvForgotPassword.setOnClickListener(this);
+
         progressBar = findViewById(R.id.progressBar);
 
         mAuth = FirebaseAuth.getInstance();
@@ -59,6 +62,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.btnLogin:
                 userLogin();
+                break;
+            case R.id.tvForgotPassword:
+                startActivity(new Intent(this, ForgotPasswordActivity.class));
                 break;
         }
     }
