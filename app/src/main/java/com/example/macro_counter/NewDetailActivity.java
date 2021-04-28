@@ -112,14 +112,31 @@ public class NewDetailActivity extends AppCompatActivity implements View.OnClick
         Food food = new Food(itemName, calories, proteinCnt, fat, cholesterol, fiber);
 //        mDatabase.child("Foods").child(itemId).setValue(food);
 //        startActivity(new Intent(this, MainActivity.class));
+//        Food food = new Food(itemName, calories, proteinCnt, fat, cholesterol, fiber);
+//        mDatabase.child("Foods").child(itemId).setValue(food);
+//        startActivity(new Intent(this, MainActivity.class));
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        FoodPost foodPost = new FoodPost(user, getTimeDate(ServerValue.TIMESTAMP), food);
-        Log.d(TAG, String.valueOf(foodPost));
+        FoodPost foodpost = new FoodPost(user, food);
         if (user != null) {
             // User is signed in
             FirebaseDatabase.getInstance().getReference("Foods")
+                    .child("food")
+                    .setValue(food);
+
+            FirebaseDatabase.getInstance().getReference("FoodPost")
                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                    .setValue(foodPost).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    .child("user")
+                    .setValue(user.getEmail());
+
+            FirebaseDatabase.getInstance().getReference("FoodPost")
+                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                    .child("time")
+                    .setValue(ServerValue.TIMESTAMP);
+
+            FirebaseDatabase.getInstance().getReference("FoodPost")
+                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                    .child("food")
+                    .setValue(food).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()){

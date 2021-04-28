@@ -13,6 +13,11 @@ public class FoodPost {
     public FoodPost(FirebaseUser user, String timeDate, Food food) {
     }
 
+    public FoodPost(FirebaseUser user, Food food) {
+        this.user = user;
+        this.food = food;
+    }
+
     public FoodPost(FirebaseUser user, Map<String, String> timestamp, Food food) {
         this.user = user;
         this.timestamp = timestamp;
