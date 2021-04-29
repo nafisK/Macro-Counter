@@ -1,12 +1,31 @@
 package com.example.macro_counter;
 
-public class Food {
-    public String itemName, calories, proteinCnt, fat, cholesterol, fiber;
+import com.google.gson.JsonArray;
+import com.parse.ParseObject;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Food extends ParseObject {
+    public String itemName, calories, proteinCnt, fat, cholesterol, fiber;
     // Default constructor required for calls to
     // DataSnapshot.getValue(Food.class)
-    public Food() {
-    }
+        public Food(JSONObject jsonObject) throws JSONException {
+            itemName = jsonObject.getString("label");
+            calories = jsonObject.getString("ENERC_KAL");
+        }
+        public static List<Food> fromJsonArray(JSONArray foodJsonArray) throws JSONException {
+            List<Food> foods = new ArrayList<>();
+            for (int i = 0; i < foodJsonArray.length(); i++) {
+                foods.add(new Food(foodJsonArray.getJSONObject(i)));
+            }
+            return foods;
+        }
+
 
     public Food(String itemName, String calories, String proteinCnt, String fat, String cholesterol, String fiber) {
         this.itemName = itemName;
@@ -64,4 +83,6 @@ public class Food {
     public void setFiber(String fiber) {
         this.fiber = fiber;
     }
+
 }
+
