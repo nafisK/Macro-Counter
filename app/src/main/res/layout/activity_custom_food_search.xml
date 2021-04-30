@@ -10,13 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <SearchView
-        android:id="@+id/test1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvFirebaseFoods"
+        android:id="@+id/rvFoods"
         android:layout_width="match_parent"
         android:layout_height="397dp"
         android:padding="8dp" />

@@ -1,20 +1,20 @@
 package com.example.macro_counter;
 
-import com.google.gson.JsonArray;
-import com.parse.ParseClassName;
-import com.parse.ParseObject;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 //extends ParseObject
 //@ParseClassName("Food")
 public class Food {
     public String itemName, calories, proteinCnt, fat, cholesterol, fiber;
     // Default constructor required for calls to
+
+
+    public Food() {
+    }
+
     // DataSnapshot.getValue(Food.class)
         public Food(JSONObject jsonObject) throws JSONException {
             itemName = jsonObject.getString("label");

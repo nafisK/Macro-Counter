@@ -42,7 +42,7 @@ public class CustomFoodSearchActivity extends AppCompatActivity {
         // Create a instance of the database and get its reference
         mbase = FirebaseDatabase.getInstance().getReference("/Foods");
 
-        recyclerView = findViewById(R.id.rvFirebaseFoods);
+        recyclerView = findViewById(R.id.rvFoods);
         // To display the Recycler view linearly
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
