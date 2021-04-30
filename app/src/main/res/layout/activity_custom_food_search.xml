@@ -10,6 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <SearchView
+        android:id="@+id/test1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvFirebaseFoods"
         android:layout_width="match_parent"
@@ -31,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
             android:layout_weight="1"
-            android:text="Custom Item" />
+            android:text="New Food" />
 
     </LinearLayout>
 

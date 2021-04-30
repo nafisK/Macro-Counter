@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp">
+
+    <TextView
+        android:id="@+id/tvAdapterFoodName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        tools:text="Apple" />
+
+    <TextView
+        android:id="@+id/tvAdapterCalories"
+        android:layout_width="10dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        tools:text="Calories: " />
+
+    <TextView
+        android:id="@+id/tvAdapterCaloriesValue"
+        android:layout_width="2dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        tools:text="100" />
+
+    <Button
+        android:id="@+id/btnAdapterAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:scaleX="0.8"
+        android:scaleY="0.8"
+        android:text="Add" />
+</LinearLayout>

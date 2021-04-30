@@ -16,6 +16,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import com.example.macro_counter.CustomFoodSearchActivity;
 import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
@@ -86,7 +91,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
 
 
 
-        btnCustomItem = view.findViewById(R.id.btnCustomItem);
+        btnCustomItem = view.findViewById(R.id.btnNewFood);
         btnCustomItem.setOnClickListener(this);
     }
 
@@ -121,8 +126,8 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
 
     public void onClick(View v) {
         switch(v.getId()){
-            case R.id.btnCustomItem:
-                Intent intent = new Intent(getActivity(), NewDetailActivity.class);
+            case R.id.btnNewFood:
+                Intent intent = new Intent(getActivity(), CustomFoodSearchActivity.class);
                 startActivity(intent);
                 break;
         }
