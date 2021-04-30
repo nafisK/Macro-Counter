@@ -14,14 +14,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder> {
     private Context context;
-    private ArrayList<Food> FoodList;
+    private List<Food> foods;
 
-    public FoodAdapter(Context context, ArrayList<Food> FoodList){
+    public FoodAdapter(Context context, List<Food> foods){
         this.context = context;
-        this.FoodList = FoodList;
+        this.foods = foods;
     }
 
     @NonNull
@@ -33,14 +34,14 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull FoodViewHolder holder, int position) {
-        Food food = FoodList.get(position);
+        Food food = foods.get(position);
         holder.bind(food);
 
     }
 
     @Override
     public int getItemCount() {
-        return FoodList.size();
+        return foods.size();
     }
 
     public class FoodViewHolder extends RecyclerView.ViewHolder {

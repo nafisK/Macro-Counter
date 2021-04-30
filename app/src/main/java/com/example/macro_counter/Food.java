@@ -1,6 +1,7 @@
 package com.example.macro_counter;
 
 import com.google.gson.JsonArray;
+import com.parse.ParseClassName;
 import com.parse.ParseObject;
 
 import org.json.JSONArray;
@@ -9,8 +10,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-
-public class Food extends ParseObject {
+//extends ParseObject
+//@ParseClassName("Food")
+public class Food {
     public String itemName, calories, proteinCnt, fat, cholesterol, fiber;
     // Default constructor required for calls to
     // DataSnapshot.getValue(Food.class)
@@ -18,10 +20,21 @@ public class Food extends ParseObject {
             itemName = jsonObject.getString("label");
             calories = jsonObject.getString("ENERC_KAL");
         }
-        public static List<Food> fromJsonArray(JSONArray foodJsonArray) throws JSONException {
-            List<Food> foods = new ArrayList<>();
+        public static ArrayList<Food> fromJsonArray(JSONArray foodJsonArray) throws JSONException {
+            ArrayList<Food> foods = new ArrayList<>();
             for (int i = 0; i < foodJsonArray.length(); i++) {
-                foods.add(new Food(foodJsonArray.getJSONObject(i)));
+                JSONObject hintObject = foodJsonArray.getJSONObject(i);
+                JSONObject foodObject = hintObject.getJSONObject("food");
+                JSONObject nutObject = foodObject.getJSONObject("nutrients");
+
+                String foodLabel = foodObject.getString("label");
+                Integer calories = nutObject.getInt("ENERC_KCAL");
+                Double protein = nutObject.getDouble("PROCNT");
+                Double fat = nutObject.getDouble("FAT");
+                Double chol = nutObject.getDouble("CHOCDF");
+//                Double fiber = nutObject.getDouble("FIBTG");
+
+                foods.add(new Food(foodLabel, calories.toString(), protein.toString(), fat.toString(), chol.toString(), "0"));
             }
             return foods;
         }

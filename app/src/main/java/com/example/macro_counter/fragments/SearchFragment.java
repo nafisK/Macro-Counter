@@ -46,8 +46,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
     private Button btnCustomItem;
     private RecyclerView rvFoods;
     private FoodAdapter foodAdapter;
-    private ArrayList<Food> foodList;
-    List<Food> foods;
+    List<Food> foodList;
 
     public SearchFragment() {
         // Required empty public constructor
@@ -58,7 +57,6 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_search, container, false);
-
 
     }
 
@@ -82,6 +80,10 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
         //4. set the layout manager on the recycler view
         rvFoods.setLayoutManager(new LinearLayoutManager(getContext()));
         parseJSON();
+//        Log.i(TAG, "Food0ID:" + foodList.get(1).itemName);
+//        foodAdapter.notifyDataSetChanged();
+
+
 
 
         btnCustomItem = view.findViewById(R.id.btnCustomItem);
@@ -96,10 +98,14 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                 Log.d(TAG, "onSuccess");
                 JSONObject jsonObject = json.jsonObject;
                 try {
-                    JSONArray parsed = jsonObject.getJSONArray("parsed");
-                    Log.i(TAG, "Parsed: " + parsed.toString());
-                    foods = Food.fromJsonArray(parsed);
-                    Log.i(TAG, "Foods:" + foods.size());
+                    JSONArray hints = jsonObject.getJSONArray("hints");
+//                    JSONObject results = hints.getJSONObject(0);
+//                    JSONObject food = results.getJSONObject("food");
+                    Log.i(TAG, "Hints: " + hints.toString());
+                    foodList.addAll(Food.fromJsonArray(hints));
+                    foodAdapter.notifyDataSetChanged();
+                    Log.i(TAG, "Foods:" + foodList.size());
+                    Log.i(TAG, "Food0ID:" + foodList.get(1).itemName);
                 } catch (JSONException e) {
                     Log.e(TAG, "Hit json exception");
                     e.printStackTrace();
