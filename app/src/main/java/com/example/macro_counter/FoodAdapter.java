@@ -1,72 +1,67 @@
-package com.example.macro_counter;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
-
-public class FoodAdapter extends FirebaseRecyclerAdapter<Food, FoodAdapter.FoodsViewholder> {
-
-    public FoodAdapter(@NonNull FirebaseRecyclerOptions<Food> options)
-    {
-        super(options);
-    }
-
-    // Function to bind the view in Food Entry view(here
-    // "food_entry.xml") with data in
-    // model class(here "Food.class")
-    @Override
-    protected void
-    onBindViewHolder(@NonNull FoodsViewholder holder,
-                     int position, @NonNull Food model)
-    {
-
-        // Add food name from model class (here
-        // "Food.class")to appropriate view in Card
-        // view (here "food_entry.xml")
-        holder.tvAdapterFoodName.setText(model.getItemName());
-
-        holder.tvAdapterCalories.setText("Calories:");
-
-        // Add calorie value from model class (here
-        // "Food.class")to appropriate view in Card
-        // view (here "food_entry.xml")
-        holder.tvAdapterCaloriesValue.setText(model.getCalories());
-    }
-
-    // "person.xml")in
-    // which the data will be shown
-    @NonNull
-    @Override
-    public FoodsViewholder
-    onCreateViewHolder(@NonNull ViewGroup parent,
-                       int viewType)
-    {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.food_entry, parent, false);
-        return new FoodAdapter.FoodsViewholder(view);
-    }
-
-    // Sub Class to create references of the views in Crad
-    // view (here "person.xml")
-    class FoodsViewholder extends RecyclerView.ViewHolder {
-        TextView tvAdapterFoodName, tvAdapterCalories, tvAdapterCaloriesValue;
-        Button btnAdapterAdd;
-
-        public FoodsViewholder(@NonNull View itemView) {
-            super(itemView);
-
-            tvAdapterFoodName = itemView.findViewById(R.id.tvAdapterFoodName);
-            tvAdapterCalories = itemView.findViewById(R.id.tvAdapterCalories);
-            tvAdapterCaloriesValue = itemView.findViewById(R.id.tvAdapterCaloriesValue);
-            btnAdapterAdd = itemView.findViewById(R.id.btnAdapterAdd);
-        }
-    }
-
-}
+//package com.example.macro_counter;
+//
+//import android.content.Context;
+//import android.view.LayoutInflater;
+//import android.view.View;
+//import android.view.ViewGroup;
+//import android.widget.Button;
+//import android.widget.TextView;
+//
+//import androidx.annotation.NonNull;
+//import androidx.recyclerview.widget.RecyclerView;
+//
+//import com.firebase.ui.database.FirebaseRecyclerAdapter;
+//import com.firebase.ui.database.FirebaseRecyclerOptions;
+//
+//import java.util.List;
+//
+//
+//public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder> {
+//    private Context context;
+//    private List<Food> foods;
+//
+//    public FoodAdapter(Context context, List<Food> foods){
+//        this.context = context;
+//        this.foods = foods;
+//    }
+//
+//    @NonNull
+//    @Override
+//    public FoodViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+//        View view = LayoutInflater.from(context).inflate(R.layout.fooditem_card, parent, false);
+//        return new FoodViewHolder(view);
+//    }
+//
+//    @Override
+//    public void onBindViewHolder(@NonNull FoodViewHolder holder, int position) {
+//        Food food = foods.get(position);
+//        holder.bind(food);
+//
+//    }
+//
+//    @Override
+//    public int getItemCount() {
+//        return foods.size();
+//    }
+//
+//    public class FoodViewHolder extends RecyclerView.ViewHolder {
+//        private TextView tvFoodName;
+//        private TextView tvCalNumber;
+////        private Button btAddFood;
+//
+//        public FoodViewHolder(@NonNull View itemView) {
+//            super(itemView);
+//            tvFoodName = itemView.findViewById(R.id.tvFoodName);
+//            tvCalNumber = itemView.findViewById(R.id.tvCalNumber);
+////            btAddFood = itemView.findViewById(R.id.btAddButton);
+//        }
+//
+//        public void bind(Food food) {
+//            // Bind the food data to the view elements
+//            tvFoodName.setText(food.getItemName());
+//            tvCalNumber.setText("Calories: " + food.getCalories());
+//        }
+//    }
+//
+//
+//}

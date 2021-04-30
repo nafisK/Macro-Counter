@@ -14,7 +14,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class CustomFoodSearchActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    FoodAdapter adapter;
+    FoodAdapterFb adapter;
     DatabaseReference mbase; // Firebase realtime Database
     SearchView svSearchFood;
 
@@ -54,7 +54,7 @@ public class CustomFoodSearchActivity extends AppCompatActivity {
 
         // Connecting object of required Adapter class to
         // the Adapter class itself
-        adapter = new FoodAdapter(options);
+        adapter = new FoodAdapterFb(options);
 
         // Connecting Adapter class with the Recycler view
         recyclerView.setAdapter(adapter);
