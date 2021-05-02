@@ -23,7 +23,7 @@ public class CustomFoodSearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_food_search);
 
-        //svSearchFood = findViewById(R.id.test1); // crashes
+        //svSearchFood = findViewById(R.id.svSearchFood); // crashes
         /*svSearchFood.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

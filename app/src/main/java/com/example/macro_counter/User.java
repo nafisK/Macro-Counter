@@ -11,6 +11,7 @@ public class User {
     public String heightCm;
     public String age;
     public String activity;
+    public String calorieIntake;
 
     // Default constructor required for calls to
     // DataSnapshot.getValue(User.class)
@@ -32,8 +33,48 @@ public class User {
         this.heightCm = heightCm;
         this.age = age;
         this.activity = activity;
+        this.calorieIntake = calculateCalorieIntake(weight, heightFeet, heightInch, heightCm, age, activity);
     }
 
+    public String calculateCalorieIntake(String weight, String heightFeet, String heightInch, String heightCm, String age, String activity ) {
+        double CalorieIntake = 0;
+        int wght = Integer.parseInt(weight);
+        int ageInt = Integer.parseInt(age);
+
+        if(heightCm.equals("")) {
+            int heightFt = Integer.parseInt(heightFeet);
+            int heightTotalInches = Integer.parseInt(heightInch) + (12 * heightFt);
+
+            CalorieIntake = 66 + (6.3 * wght) + (12.9 * heightTotalInches) - (6.8 * ageInt);
+        }
+        else {
+            int heightCmInt = Integer.parseInt(heightCm);
+            double heightTotalInches = heightCmInt / 2.54;
+
+            CalorieIntake = 66 + (6.3 * wght)  + (12.9 * heightTotalInches) - (6.8 * ageInt);
+
+        }
+
+        switch(activity) {
+            case "Sedentary":
+                CalorieIntake = CalorieIntake * 1.2;
+                break;
+            case "Light":
+                CalorieIntake = CalorieIntake * 1.375;
+                break;
+            case "Moderate":
+                CalorieIntake = CalorieIntake * 1.55;
+                break;
+            case "Hard":
+                CalorieIntake = CalorieIntake * 1.725;
+                break;
+            case "Very Hard":
+                CalorieIntake = CalorieIntake * 1.9;
+                break;
+        }
+
+        return String.valueOf(CalorieIntake);
+    }
     public String getAge() {
         return age;
     }
