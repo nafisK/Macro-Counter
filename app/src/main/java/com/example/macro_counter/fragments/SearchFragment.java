@@ -9,12 +9,18 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -51,6 +57,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
     private Button btnCustomItem;
     private RecyclerView rvFoods;
     private FoodAdapter foodAdapter;
+    private SearchView searchView;
     List<Food> foodList;
 
     public SearchFragment() {
@@ -63,6 +70,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_search, container, false);
 
+
     }
 
     // This event is triggered soon after onCreateView().
@@ -73,6 +81,9 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
         // Setup any handles to view objects here
         // EditText etFoo = (EditText) view.findViewById(R.id.etFoo);
         rvFoods = view.findViewById(R.id.rvFoods);
+
+        EditText editText = view.findViewById(R.id.edit_text);
+
         foodList = new ArrayList<>();
         foodAdapter = new FoodAdapter(getContext(), foodList);
 
@@ -82,17 +93,60 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
         //2. create the data source
         //3. set the adapter on the recycler view
         rvFoods.setAdapter(foodAdapter);
+
         //4. set the layout manager on the recycler view
         rvFoods.setLayoutManager(new LinearLayoutManager(getContext()));
         parseJSON();
 //        Log.i(TAG, "Food0ID:" + foodList.get(1).itemName);
 //        foodAdapter.notifyDataSetChanged();
 
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                filter(s.toString());
+            }
+        });
+
+//        searchView = view.findViewById(R.id.svSearchFood);
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                foodAdapter.getFilter().filter(newText);
+//                return false;
+//            }
+//        });
 
 
 
         btnCustomItem = view.findViewById(R.id.btnNewFood);
         btnCustomItem.setOnClickListener(this);
+    }
+
+    private void filter (String text) {
+        ArrayList<Food> filteredList = new ArrayList<>();
+
+        for (Food item : foodList) {
+            if (item.getItemName().toLowerCase().contains(text.toLowerCase())) {
+                filteredList.add(item);
+            }
+        }
+
+        foodAdapter.filterList(filteredList);
     }
 
     private void parseJSON() {

@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,10 +21,12 @@ import java.util.List;
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder> {
     private Context context;
     private List<Food> foods;
+//    private List<Food> foodsFull;
 
     public FoodAdapter(Context context, List<Food> foods){
         this.context = context;
         this.foods = foods;
+//        foodsFull = new ArrayList<>(foods);
     }
 
     @NonNull
@@ -62,4 +66,45 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
             tvCalNumber.setText("Calories: " + food.getCalories());
         }
     }
+
+    public void filterList(ArrayList<Food> filteredList) {
+        foods = filteredList;
+        notifyDataSetChanged();
+    }
+
+//    @Override
+//    public Filter getFilter() {
+//        return foodFilter;
+//    }
+//
+//    private Filter foodFilter = new Filter() {
+//        @Override
+//        protected FilterResults performFiltering(CharSequence constraint) {
+//             List<Food> filteredList = new ArrayList<>();
+//
+//             if (constraint == null || constraint.length() == 0) {
+//                 filteredList.addAll(foodsFull);
+//             } else {
+//                 String filterPattern = constraint.toString().toLowerCase().trim();
+//
+//                 for (Food food : foodsFull) {
+//                     if (food.getItemName().toLowerCase().startsWith(filterPattern)) {
+//                         filteredList.add(food);
+//                     }
+//                 }
+//             }
+//
+//             FilterResults filterResults  = new FilterResults();
+//             filterResults.values = filteredList;
+//
+//             return filterResults;
+//        }
+//
+//        @Override
+//        protected void publishResults(CharSequence constraint, FilterResults filterResults) {
+//            foods.clear();
+//            foods.addAll((List) filterResults.values);
+//            notifyDataSetChanged();
+//        }
+//    };
 }
