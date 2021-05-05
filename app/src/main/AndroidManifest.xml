@@ -13,7 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Macro_Counter">
-        <activity android:name=".CustomFoodSearchActivity"></activity>
+        <activity android:name=".SearchAddButtonActivity"></activity>
+        <activity android:name=".SearchDetailActivity" />
+        <activity android:name=".CustomFoodSearchActivity" />
         <activity android:name=".ForgotPasswordActivity" />
         <activity android:name=".NewDetailActivity" />
         <activity android:name=".SignUpActivity" />
