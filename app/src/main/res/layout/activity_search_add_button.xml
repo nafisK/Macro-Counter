@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_margin="6dp"
     android:orientation="vertical"
-    tools:context=".SignUpActivity">
+    tools:context=".SearchAddButtonActivity">
+
 
     <TextView
         android:id="@+id/tvNewDetail"
@@ -41,7 +42,7 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <EditText
+        <TextView
             android:id="@+id/textItemName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -74,7 +75,7 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <EditText
+        <TextView
             android:id="@+id/textCalories"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -107,7 +108,7 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <EditText
+        <TextView
             android:id="@+id/textProteinCnt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -140,7 +141,7 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <EditText
+        <TextView
             android:id="@+id/textFat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -173,7 +174,7 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <EditText
+        <TextView
             android:id="@+id/textCholesterolCDF"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -206,7 +207,7 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <EditText
+        <TextView
             android:id="@+id/textFiber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -219,36 +220,6 @@
             android:textAlignment="center" />
 
     </LinearLayout>
-<!--    <LinearLayout-->
-<!--        android:id="@+id/linearLayout3"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_alignParentLeft="true"-->
-<!--        android:layout_alignParentTop="true"-->
-<!--        android:orientation="horizontal">-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/tvActivity"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginLeft="26dp"-->
-<!--            android:layout_marginTop="20dp"-->
-<!--            android:fontFamily="sans-serif-black"-->
-<!--            android:text="Activity level"-->
-<!--            android:textAlignment="center"-->
-<!--            android:textSize="18sp"-->
-<!--            android:textStyle="bold" />-->
-
-<!--        <Spinner-->
-<!--            android:id="@+id/spinActivity"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginLeft="30dp"-->
-<!--            android:layout_marginTop="20dp"-->
-<!--            android:layout_marginRight="26dp"-->
-<!--            android:spinnerMode="dropdown" />-->
-
-<!--    </LinearLayout>-->
 
     <LinearLayout
         android:id="@+id/linearLayoutbtn"
@@ -281,6 +252,5 @@
             android:text="Add" />
 
     </LinearLayout>
-
 
 </LinearLayout>

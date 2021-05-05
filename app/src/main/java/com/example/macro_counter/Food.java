@@ -3,14 +3,16 @@ package com.example.macro_counter;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
 import java.util.ArrayList;
-//extends ParseObject
-//@ParseClassName("Food")
-public class Food {
-    public String itemName, calories, proteinCnt, fat, cholesterol, fiber;
-    // Default constructor required for calls to
 
+@Parcel
+public class Food {
+    public String itemName, calories, proteinCnt, fat, cholesterol, fiber, username, email;
+//    public long timeStamp;
+    public String timeStamp;
+    // Default constructor required for calls to
 
     public Food() {
     }
@@ -96,6 +98,23 @@ public class Food {
     public void setFiber(String fiber) {
         this.fiber = fiber;
     }
+
+    public void setUsername(String userame) { this.username = username; }
+
+    public String getUsername() { return username; }
+
+    public String getEmail() { return email; }
+
+    public void setEmail(String email) { this.email = email; }
+
+//    public void setTimeStamp(long timeStamp) { this.timeStamp = timeStamp; }
+//
+//    public long getTimeStamp() { return timeStamp; }
+
+    public void setTimeStamp(String timeStamp) { this.timeStamp = timeStamp; }
+
+    public String getTimeStamp() { return timeStamp; }
+
 
 }
 
