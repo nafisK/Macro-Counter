@@ -1,8 +1,5 @@
 package com.example.macro_counter;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -16,6 +13,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -28,8 +28,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private EditText etEmail, etPassword, etName, etAge, etWeight, etHeightCm, etHeightFt, etHeightIn;
     private Button btnSignUp;
     private ProgressBar progressBar;
-    private Spinner spinActivity;
+    private Spinner spinActivity, genderSpinActivity;
     private String activity;
+    private String gender;
 
     private FirebaseAuth mAuth;
 
@@ -57,6 +58,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         progressBar = findViewById(R.id.progressBar);
         spinActivity = findViewById(R.id.spinActivity);
+        genderSpinActivity = findViewById(R.id.spinGender);
 
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(SignUpActivity.this,
                 android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.spinActivityString));
@@ -81,6 +83,33 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                         break;
                     case 4:
                         activity = "very hard";
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        ArrayAdapter<String> myGenderAdapter = new ArrayAdapter<String>(SignUpActivity.this,
+                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.genderActivityString));
+        myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        genderSpinActivity.setAdapter(myGenderAdapter);
+        genderSpinActivity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        gender = "Male";
+                        break;
+                    case 1:
+                        gender = "Female";
+                        break;
+                    case 2:
+                        gender = "Other";
                         break;
                 }
             }
@@ -163,7 +192,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            User user = new User(email, name, password, weight, heightFt, heightIn, heightCm, age, activity);
+                            User user = new User(email, name, password, weight, heightFt, heightIn, heightCm, age, gender, activity);
 
                             FirebaseDatabase.getInstance().getReference("Users")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -184,7 +213,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             });
 
                         } else {
-                            Toast.makeText(SignUpActivity.this, "Failed to register! Try Again!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(SignUpActivity.this, "mAuth failed to create user! Try Again!", Toast.LENGTH_LONG).show();
                         }
                     }
                 });

@@ -10,7 +10,9 @@ public class User {
     public String heightInch;
     public String heightCm;
     public String age;
+    public String gender;
     public String activity;
+    public String calorieIntake;
 
     // Default constructor required for calls to
     // DataSnapshot.getValue(User.class)
@@ -22,7 +24,7 @@ public class User {
         this.password = password;
     }
 
-    public User(String email, String name, String password, String weight, String heightFeet, String heightInch, String heightCm, String age, String activity) {
+    public User(String email, String name, String password, String weight, String heightFeet, String heightInch, String heightCm, String age, String gender, String activity) {
         this.email = email;
         this.name = name;
         this.password = password;
@@ -31,9 +33,55 @@ public class User {
         this.heightInch = heightInch;
         this.heightCm = heightCm;
         this.age = age;
+        this.gender = gender;
         this.activity = activity;
+        this.calorieIntake = calculateCalorieIntake(weight, heightFeet, heightInch, heightCm, age, gender, activity);
     }
 
+    public String calculateCalorieIntake(String weight, String heightFeet, String heightInch, String heightCm, String age, String gender, String activity ) {
+        double CalorieIntake = 0;
+        int wght = Integer.parseInt(weight);
+        int ageInt = Integer.parseInt(age);
+
+        if(heightCm.equals("")) {
+            int heightFt = Integer.parseInt(heightFeet);
+            int heightTotalInches = Integer.parseInt(heightInch) + (12 * heightFt);
+
+            if(gender.equals("Male")){
+                CalorieIntake = 66 + (6.3 * wght) + (12.9 * heightTotalInches) - (6.8 * ageInt);
+            }
+            else {
+                CalorieIntake = 65 + (4.3 * wght) + (4.7 * heightTotalInches) - (4.7 * ageInt);
+            }
+        }
+        else {
+            int heightCmInt = Integer.parseInt(heightCm);
+            double heightTotalInches = heightCmInt / 2.54;
+
+            CalorieIntake = 66 + (6.3 * wght)  + (12.9 * heightTotalInches) - (6.8 * ageInt);
+
+        }
+
+        switch(activity) {
+            case "Sedentary":
+                CalorieIntake = CalorieIntake * 1.2;
+                break;
+            case "Light":
+                CalorieIntake = CalorieIntake * 1.375;
+                break;
+            case "Moderate":
+                CalorieIntake = CalorieIntake * 1.55;
+                break;
+            case "Hard":
+                CalorieIntake = CalorieIntake * 1.725;
+                break;
+            case "Very Hard":
+                CalorieIntake = CalorieIntake * 1.9;
+                break;
+        }
+
+        return String.valueOf(CalorieIntake);
+    }
     public String getAge() {
         return age;
     }
@@ -105,4 +153,5 @@ public class User {
     public void setHeightCm(String heightCm) {
         this.heightCm = heightCm;
     }
+
 }

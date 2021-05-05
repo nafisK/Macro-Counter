@@ -29,7 +29,6 @@ public class CustomFoodSearchActivity extends AppCompatActivity implements OnCli
         setContentView(R.layout.activity_custom_food_search);
 
 
-
         //svSearchFood = findViewById(R.id.test1); // crashes
         /*svSearchFood.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
