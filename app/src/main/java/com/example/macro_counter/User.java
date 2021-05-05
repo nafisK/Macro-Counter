@@ -10,6 +10,7 @@ public class User {
     public String heightInch;
     public String heightCm;
     public String age;
+    public String gender;
     public String activity;
     public String calorieIntake;
 
@@ -23,7 +24,7 @@ public class User {
         this.password = password;
     }
 
-    public User(String email, String name, String password, String weight, String heightFeet, String heightInch, String heightCm, String age, String activity) {
+    public User(String email, String name, String password, String weight, String heightFeet, String heightInch, String heightCm, String age, String gender, String activity) {
         this.email = email;
         this.name = name;
         this.password = password;
@@ -32,11 +33,12 @@ public class User {
         this.heightInch = heightInch;
         this.heightCm = heightCm;
         this.age = age;
+        this.gender = gender;
         this.activity = activity;
-        this.calorieIntake = calculateCalorieIntake(weight, heightFeet, heightInch, heightCm, age, activity);
+        this.calorieIntake = calculateCalorieIntake(weight, heightFeet, heightInch, heightCm, age, gender, activity);
     }
 
-    public String calculateCalorieIntake(String weight, String heightFeet, String heightInch, String heightCm, String age, String activity ) {
+    public String calculateCalorieIntake(String weight, String heightFeet, String heightInch, String heightCm, String age, String gender, String activity ) {
         double CalorieIntake = 0;
         int wght = Integer.parseInt(weight);
         int ageInt = Integer.parseInt(age);
@@ -45,7 +47,12 @@ public class User {
             int heightFt = Integer.parseInt(heightFeet);
             int heightTotalInches = Integer.parseInt(heightInch) + (12 * heightFt);
 
-            CalorieIntake = 66 + (6.3 * wght) + (12.9 * heightTotalInches) - (6.8 * ageInt);
+            if(gender.equals("Male")){
+                CalorieIntake = 66 + (6.3 * wght) + (12.9 * heightTotalInches) - (6.8 * ageInt);
+            }
+            else {
+                CalorieIntake = 65 + (4.3 * wght) + (4.7 * heightTotalInches) - (4.7 * ageInt);
+            }
         }
         else {
             int heightCmInt = Integer.parseInt(heightCm);
@@ -146,4 +153,5 @@ public class User {
     public void setHeightCm(String heightCm) {
         this.heightCm = heightCm;
     }
+
 }
