@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="280dp"
+        android:layout_height="30dp"
+        android:text="Username"
+        android:textStyle="bold"
+        tools:text="Nafis Khan" />
+
+    <TextView
+        android:id="@+id/timePosted"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        tools:text="March 9, 2020" />
+
+    <TextView
+        android:id="@+id/itemNameText"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_below="@+id/username"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="0dp"
+        android:text="Food: " />
+
+    <TextView
+        android:id="@+id/itemName"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_below="@id/username"
+        android:layout_toRightOf="@id/itemNameText"
+        android:text="Apple"
+        />
+
+
+        <TextView
+            android:id="@+id/calories"
+            android:text="2000"
+            android:layout_width="wrap_content"
+            android:layout_below="@id/timePosted"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            />
+
+
+    <TextView
+        android:id="@+id/CalText"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:height="30dp"
+        android:layout_marginTop="0dp"
+        android:layout_below="@id/timePosted"
+        android:layout_toLeftOf="@id/calories"
+        android:text="Calories: "
+        />
+
+
+    <TextView
+        android:id="@+id/proteinsText"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_below="@+id/itemName"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="0dp"
+        tools:text="Proteins: " />
+
+    <TextView
+        android:id="@+id/proteins"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="0dp"
+        android:layout_toRightOf="@id/proteinsText"
+        android:layout_below="@id/itemName"
+        android:text="200"
+        />
+
+    <TextView
+        android:id="@+id/fiberText"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_below="@+id/itemName"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="50dp"
+        android:layout_toRightOf="@id/proteins"
+        android:text="Fiber: "
+        />
+
+    <TextView
+        android:id="@+id/fiber"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_below="@+id/itemName"
+        android:layout_marginTop="0dp"
+        android:layout_toRightOf="@id/fiberText"
+        android:text="500"
+        />
+
+
+    <TextView
+        android:id="@+id/fatsText"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_below="@+id/itemName"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="50dp"
+        android:layout_toRightOf="@id/fiber"
+        android:text="Fats: "/>
+
+    <TextView
+        android:id="@+id/fats"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_below="@+id/itemName"
+        android:layout_marginTop="0dp"
+        android:layout_toRightOf="@id/fatsText"
+        android:text="200"/>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_below="@+id/proteins"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+
+</RelativeLayout>

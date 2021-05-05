@@ -1,6 +1,10 @@
 package com.example.macro_counter;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -11,17 +15,20 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class CustomFoodSearchActivity extends AppCompatActivity {
+public class CustomFoodSearchActivity extends AppCompatActivity implements OnClickListener{
 
     private RecyclerView recyclerView;
     FoodAdapterFb adapter;
     DatabaseReference mbase; // Firebase realtime Database
     SearchView svSearchFood;
+    private Button btnNewFood;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_food_search);
+
+
 
         //svSearchFood = findViewById(R.id.test1); // crashes
         /*svSearchFood.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -58,6 +65,11 @@ public class CustomFoodSearchActivity extends AppCompatActivity {
 
         // Connecting Adapter class with the Recycler view
         recyclerView.setAdapter(adapter);
+
+
+        btnNewFood = findViewById(R.id.btnNewFood);
+        btnNewFood.setOnClickListener(this);
+
     }
 
     // Function to tell the app to start getting
@@ -74,5 +86,14 @@ public class CustomFoodSearchActivity extends AppCompatActivity {
     {
         super.onStop();
         adapter.stopListening();
+    }
+
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.btnNewFood:
+                Intent intent = new Intent(this, NewDetailActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 }

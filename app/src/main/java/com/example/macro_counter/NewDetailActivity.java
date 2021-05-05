@@ -2,7 +2,6 @@ package com.example.macro_counter;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,7 +16,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ServerValue;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -48,12 +46,12 @@ public class NewDetailActivity extends AppCompatActivity implements View.OnClick
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference("Foods");
 
-        etItemName = findViewById(R.id.etItemName);
-        etCalories = findViewById(R.id.etCalories);
-        etProteinCnt = findViewById(R.id.etProteinCnt);
-        etFat = findViewById(R.id.etFat);
-        etCholesterolCDF = findViewById(R.id.etCholesterolCDF);
-        etFiber = findViewById(R.id.etFiber);
+        etItemName = findViewById(R.id.textItemName);
+        etCalories = findViewById(R.id.textCalories);
+        etProteinCnt = findViewById(R.id.textProteinCnt);
+        etFat = findViewById(R.id.textFat);
+        etCholesterolCDF = findViewById(R.id.textCholesterolCDF);
+        etFiber = findViewById(R.id.textFiber);
 
         btnCancel = findViewById(R.id.btnCancel);
         btnCancel.setOnClickListener(this);
@@ -123,28 +121,47 @@ public class NewDetailActivity extends AppCompatActivity implements View.OnClick
 
         if (user != null) {
             // User is signed in
+            String name = user.getDisplayName();
+            food.setUsername(name);
+            food.setEmail(user.getEmail());
 
-            mapTimeStamp.put("timestamp", ServerValue.TIMESTAMP);
-            mapUser.put("user email", user.getEmail());
+            Date currDate = new Date();
+            SimpleDateFormat formattedDate = new SimpleDateFormat("MMMM dd, Y");
+            String timeStamp = formattedDate.format(currDate);
+            food.setTimeStamp(timeStamp);
 
-            FirebaseDatabase.getInstance().getReference("Foods")
-                    .child(foodKey)
-                    .setValue(food);
+
+//            mapTimeStamp.put("timestamp", ServerValue.TIMESTAMP);
+
+            /* UNUSED CODE FOR REFERENCE
+
+             FirebaseDatabase.getInstance().getReference("Foods")
+            .child(foodKey)
+            .setValue(food);
 
             FirebaseDatabase.getInstance().getReference("FoodPost")
                     .child(foodPostKey)
                     .child("user")
                     .setValue(mapUser);
-
             FirebaseDatabase.getInstance().getReference("FoodPost")
                     .child(foodPostKey)
-                    .child("time")
-                    .setValue(mapTimeStamp);
+//                    .child("time")
+                    .setValue(timeString);
 
-            FirebaseDatabase.getInstance().getReference("FoodPost")
-                    .child(foodPostKey)
-                    .child("food")
-                    .setValue(food).addOnCompleteListener(new OnCompleteListener<Void>() {
+             */
+//            FirebaseDatabase.getInstance().getReference("FoodPost")
+//                    .child(foodPostKey)
+//                    .child("food")
+//                    .setValue(food).addOnCompleteListener(new OnCompleteListener<Void>()
+
+//            FirebaseDatabase.getInstance().getReference("FoodPost")
+//                    .child(foodPostKey)
+//                    .setValue(food).addOnCompleteListener(new OnCompleteListener<Void>()
+
+            FirebaseDatabase.getInstance().getReference("Foods")
+                    .child(foodKey)
+                    .setValue(food).addOnCompleteListener(new OnCompleteListener<Void>()
+            {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()){

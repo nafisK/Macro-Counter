@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_margin="6dp"
     android:orientation="vertical"
-    tools:context=".SignUpActivity">
+    tools:context=".SearchDetailActivity">
+
 
     <TextView
         android:id="@+id/tvNewDetail"
@@ -15,7 +16,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="30dp"
         android:fontFamily="sans-serif-black"
-        android:text="New Item Details"
+        android:text="Item Details"
         android:textAlignment="center"
         android:textSize="30sp"
 
@@ -41,8 +42,8 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/textItemName"
+        <TextView
+            android:id="@+id/tvItemNameValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="55dp"
@@ -74,8 +75,8 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/textCalories"
+        <TextView
+            android:id="@+id/tvCaloriesValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="75dp"
@@ -107,8 +108,8 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/textProteinCnt"
+        <TextView
+            android:id="@+id/tvProteinCntValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
@@ -140,8 +141,8 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/textFat"
+        <TextView
+            android:id="@+id/tvFatValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="118dp"
@@ -173,8 +174,8 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/textCholesterolCDF"
+        <TextView
+            android:id="@+id/tvCholesterolCDFValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
@@ -206,8 +207,8 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/textFiber"
+        <TextView
+            android:id="@+id/tvFiberValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="100dp"
@@ -219,36 +220,6 @@
             android:textAlignment="center" />
 
     </LinearLayout>
-<!--    <LinearLayout-->
-<!--        android:id="@+id/linearLayout3"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_alignParentLeft="true"-->
-<!--        android:layout_alignParentTop="true"-->
-<!--        android:orientation="horizontal">-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/tvActivity"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginLeft="26dp"-->
-<!--            android:layout_marginTop="20dp"-->
-<!--            android:fontFamily="sans-serif-black"-->
-<!--            android:text="Activity level"-->
-<!--            android:textAlignment="center"-->
-<!--            android:textSize="18sp"-->
-<!--            android:textStyle="bold" />-->
-
-<!--        <Spinner-->
-<!--            android:id="@+id/spinActivity"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginLeft="30dp"-->
-<!--            android:layout_marginTop="20dp"-->
-<!--            android:layout_marginRight="26dp"-->
-<!--            android:spinnerMode="dropdown" />-->
-
-<!--    </LinearLayout>-->
 
     <LinearLayout
         android:id="@+id/linearLayoutbtn"
@@ -268,17 +239,6 @@
             android:layout_marginBottom="20dp"
             android:layout_weight="1"
             android:text="Cancel" />
-
-        <Button
-            android:id="@+id/btnApply"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginRight="26dp"
-            android:layout_marginBottom="20dp"
-            android:layout_weight="1"
-            android:text="Add" />
 
     </LinearLayout>
 
