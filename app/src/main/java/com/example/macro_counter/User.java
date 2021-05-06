@@ -1,5 +1,6 @@
 package com.example.macro_counter;
 
+
 public class User {
 
     public String email;
