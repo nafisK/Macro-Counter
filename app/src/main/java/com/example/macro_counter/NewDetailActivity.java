@@ -130,34 +130,6 @@ public class NewDetailActivity extends AppCompatActivity implements View.OnClick
             String timeStamp = formattedDate.format(currDate);
             food.setTimeStamp(timeStamp);
 
-
-//            mapTimeStamp.put("timestamp", ServerValue.TIMESTAMP);
-
-            /* UNUSED CODE FOR REFERENCE
-
-             FirebaseDatabase.getInstance().getReference("Foods")
-            .child(foodKey)
-            .setValue(food);
-
-            FirebaseDatabase.getInstance().getReference("FoodPost")
-                    .child(foodPostKey)
-                    .child("user")
-                    .setValue(mapUser);
-            FirebaseDatabase.getInstance().getReference("FoodPost")
-                    .child(foodPostKey)
-//                    .child("time")
-                    .setValue(timeString);
-
-             */
-//            FirebaseDatabase.getInstance().getReference("FoodPost")
-//                    .child(foodPostKey)
-//                    .child("food")
-//                    .setValue(food).addOnCompleteListener(new OnCompleteListener<Void>()
-
-//            FirebaseDatabase.getInstance().getReference("FoodPost")
-//                    .child(foodPostKey)
-//                    .setValue(food).addOnCompleteListener(new OnCompleteListener<Void>()
-
             FirebaseDatabase.getInstance().getReference("Foods")
                     .child(foodKey)
                     .setValue(food).addOnCompleteListener(new OnCompleteListener<Void>()

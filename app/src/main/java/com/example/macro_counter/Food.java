@@ -18,28 +18,28 @@ public class Food {
     }
 
     // DataSnapshot.getValue(Food.class)
-        public Food(JSONObject jsonObject) throws JSONException {
-            itemName = jsonObject.getString("label");
-            calories = jsonObject.getString("ENERC_KAL");
-        }
-        public static ArrayList<Food> fromJsonArray(JSONArray foodJsonArray) throws JSONException {
-            ArrayList<Food> foods = new ArrayList<>();
-            for (int i = 0; i < foodJsonArray.length(); i++) {
-                JSONObject hintObject = foodJsonArray.getJSONObject(i);
-                JSONObject foodObject = hintObject.getJSONObject("food");
-                JSONObject nutObject = foodObject.getJSONObject("nutrients");
+    public Food(JSONObject jsonObject) throws JSONException {
+        itemName = jsonObject.getString("label");
+        calories = jsonObject.getString("ENERC_KAL");
+    }
+    public static ArrayList<Food> fromJsonArray(JSONArray foodJsonArray) throws JSONException {
+        ArrayList<Food> foods = new ArrayList<>();
+        for (int i = 0; i < foodJsonArray.length(); i++) {
+            JSONObject hintObject = foodJsonArray.getJSONObject(i);
+            JSONObject foodObject = hintObject.getJSONObject("food");
+            JSONObject nutObject = foodObject.getJSONObject("nutrients");
 
-                String foodLabel = foodObject.getString("label");
-                Integer calories = nutObject.getInt("ENERC_KCAL");
-                Double protein = nutObject.getDouble("PROCNT");
-                Double fat = nutObject.getDouble("FAT");
-                Double chol = nutObject.getDouble("CHOCDF");
+            String foodLabel = foodObject.getString("label");
+            Integer calories = nutObject.getInt("ENERC_KCAL");
+            Double protein = nutObject.getDouble("PROCNT");
+            Double fat = nutObject.getDouble("FAT");
+            Double chol = nutObject.getDouble("CHOCDF");
 //                Double fiber = nutObject.getDouble("FIBTG");
 
-                foods.add(new Food(foodLabel, calories.toString(), protein.toString(), fat.toString(), chol.toString(), "0"));
-            }
-            return foods;
+            foods.add(new Food(foodLabel, calories.toString(), protein.toString(), fat.toString(), chol.toString(), "0"));
         }
+        return foods;
+    }
 
 
     public Food(String itemName, String calories, String proteinCnt, String fat, String cholesterol, String fiber) {
