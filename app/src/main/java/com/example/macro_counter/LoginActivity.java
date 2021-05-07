@@ -106,7 +106,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
                     if (user.isEmailVerified()){
-
+                        finish();
                         Intent i = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(i);
                     } else {
@@ -119,6 +119,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
             }
         });
+
     }
 
 

@@ -1,9 +1,15 @@
 package com.example.macro_counter;
 
+import android.content.Intent;
 import android.os.Bundle;
+
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
+
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -17,12 +23,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomFoodSearchActivity extends AppCompatActivity {
+public class CustomFoodSearchActivity extends AppCompatActivity implements OnClickListener{
 
     private RecyclerView recyclerView;
     FoodAdapterFb adapter;
     DatabaseReference mbase; // Firebase realtime Database
     SearchView svSearchFood;
+    private Button btnNewFood;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +74,10 @@ public class CustomFoodSearchActivity extends AppCompatActivity {
         // Connecting Adapter class with the Recycler view
         recyclerView.setAdapter(adapter);
 
+
+        btnNewFood = findViewById(R.id.btnNewFood);
+        btnNewFood.setOnClickListener(this);
+
     }
 
 
@@ -84,5 +95,14 @@ public class CustomFoodSearchActivity extends AppCompatActivity {
     {
         super.onStop();
         adapter.stopListening();
+    }
+
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.btnNewFood:
+                Intent intent = new Intent(this, NewDetailActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 }

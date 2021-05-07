@@ -1,18 +1,25 @@
 package com.example.macro_counter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
 import android.widget.Filter;
 import android.widget.Filterable;
+
+import android.widget.RelativeLayout;
+
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.parceler.Parcels;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
@@ -50,17 +57,43 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         private TextView tvFoodName;
         private TextView tvCalNumber;
 
+        private Button btAddFood;
+        RelativeLayout container;
 
         public FoodViewHolder(@NonNull View itemView) {
             super(itemView);
             tvFoodName = itemView.findViewById(R.id.tvFoodName);
             tvCalNumber = itemView.findViewById(R.id.tvCalNumber);
+
+            container = itemView.findViewById(R.id.container);
+            btAddFood = itemView.findViewById(R.id.btAddFood);
         }
 
         public void bind(Food food) {
             // Bind the food data to the view elements
             tvFoodName.setText(food.getItemName());
+
             tvCalNumber.setText("Cal: " + food.getCalories());
+            container.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context, tvFoodName.getText(), Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(context, SearchDetailActivity.class);
+                    i.putExtra("food", Parcels.wrap(food));
+                    context.startActivity(i);
+            }});
+            btAddFood.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context, "Button Works" + getAdapterPosition(), Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(context, SearchAddButtonActivity.class);
+                    i.putExtra("food", Parcels.wrap(food));
+                    context.startActivity(i);
+                }});
+
+
+
+
         }
     }
 }

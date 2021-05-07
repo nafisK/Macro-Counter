@@ -2,26 +2,25 @@
 
 **Macro_Counter** will help users track their daily calories of protein, carbs, fats and other micro nutrients
 
-## Week 11 - User Stories
+## Week 12 - User Stories
 
 The following **required** functionality is completed:
 
-- [x] Switch from Back4App to firebase. 
-- [x] Implement sign-up / sign-in / sign-out system. 
-- [x] Populate database with some dummy data. 
-- [x] Design & Implement custom food adding system. 
-- [x] Design & Implement food posting system with android and firebase. 
-- [x] Design API Search Fragment. 
-- [x] Design Firebase Search Fragment. 
+- [x] Continue API Search Fragment. (Search Bar with API)
+- [x] Continue Home Fragment. (Recycler View)
+- [x] Continue Profile Fragment. (Recycler View)
+- [x] Integrate builds (all of current activities and fragments)
 
 The following **optional** features are implemented:
+
+- [ ] Continue Firebase Search Fragment. (Search Bar with Firebase)
 
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-<img src="https://github.com/Codepath-Group-7/Macro_Counter/blob/master/walkthrough1.gif" width=250><br>
+<img src="https://github.com/Codepath-Group-7/Macro_Counter/blob/master/macroCounterUnit11.gif" width=250><br>
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
