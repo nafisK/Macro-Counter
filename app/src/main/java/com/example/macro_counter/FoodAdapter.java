@@ -7,7 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import android.widget.Filter;
+import android.widget.Filterable;
+
 import android.widget.RelativeLayout;
+
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,6 +56,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
     public class FoodViewHolder extends RecyclerView.ViewHolder {
         private TextView tvFoodName;
         private TextView tvCalNumber;
+
         private Button btAddFood;
         RelativeLayout container;
 
@@ -58,6 +64,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
             super(itemView);
             tvFoodName = itemView.findViewById(R.id.tvFoodName);
             tvCalNumber = itemView.findViewById(R.id.tvCalNumber);
+
             container = itemView.findViewById(R.id.container);
             btAddFood = itemView.findViewById(R.id.btAddFood);
         }
@@ -65,7 +72,8 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         public void bind(Food food) {
             // Bind the food data to the view elements
             tvFoodName.setText(food.getItemName());
-            tvCalNumber.setText("Calories: " + food.getCalories());
+
+            tvCalNumber.setText("Cal: " + food.getCalories());
             container.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

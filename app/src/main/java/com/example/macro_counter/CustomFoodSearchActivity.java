@@ -2,6 +2,11 @@ package com.example.macro_counter;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.widget.EditText;
+
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -14,6 +19,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CustomFoodSearchActivity extends AppCompatActivity implements OnClickListener{
 
@@ -49,6 +57,7 @@ public class CustomFoodSearchActivity extends AppCompatActivity implements OnCli
         mbase = FirebaseDatabase.getInstance().getReference("/Foods");
 
         recyclerView = findViewById(R.id.rvFoods);
+
         // To display the Recycler view linearly
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -70,6 +79,7 @@ public class CustomFoodSearchActivity extends AppCompatActivity implements OnCli
         btnNewFood.setOnClickListener(this);
 
     }
+
 
     // Function to tell the app to start getting
     // data from database on starting of the activity

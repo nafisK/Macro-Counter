@@ -1,5 +1,6 @@
 package com.example.macro_counter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,13 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class FoodAdapterFb extends FirebaseRecyclerAdapter<Food, FoodAdapterFb.FoodsViewholder> {
 
-    public FoodAdapterFb(@NonNull FirebaseRecyclerOptions<Food> options)
-    {
+    public FoodAdapterFb(@NonNull FirebaseRecyclerOptions<Food> options) {
         super(options);
     }
-
     // Function to bind the view in Food Entry view(here
     // "food_entry.xml") with data in
     // model class(here "Food.class")
@@ -40,6 +42,7 @@ public class FoodAdapterFb extends FirebaseRecyclerAdapter<Food, FoodAdapterFb.F
         // view (here "food_entry.xml")
         holder.tvAdapterCaloriesValue.setText(model.getCalories());
     }
+
 
     // "person.xml")in
     // which the data will be shown
