@@ -52,12 +52,12 @@ import okhttp3.Headers;
 
 public class SearchFragment extends Fragment implements View.OnClickListener {
 
-    public static final String FOOD_DATABASE_URL = "https://api.edamam.com/api/food-database/v2/parser?ingr=red%20apple&app_id=ef0fa9fe&app_key=32407434c5090649349047ef7e8a4255";
+    public static final String FOOD_DATABASE_URL = "https://api.edamam.com/api/food-database/v2/parser?ingr=%20&app_id=ef0fa9fe&app_key=32407434c5090649349047ef7e8a4255";
     public static final String TAG = "SearchFragment";
     private Button btnCustomItem;
     private RecyclerView rvFoods;
     private FoodAdapter foodAdapter;
-    private SearchView searchView;
+    private Button btSearchAPI;
     List<Food> foodList;
 
     public SearchFragment() {
@@ -83,8 +83,9 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
         rvFoods = view.findViewById(R.id.rvFoods);
 
         EditText editText = view.findViewById(R.id.edit_text);
+        btSearchAPI = view.findViewById(R.id.btnSearchAPI);
 
-        foodList = new ArrayList<>();
+                foodList = new ArrayList<>();
         foodAdapter = new FoodAdapter(getContext(), foodList);
 
         //Steps to use the recycler view:
@@ -96,75 +97,42 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
 
         //4. set the layout manager on the recycler view
         rvFoods.setLayoutManager(new LinearLayoutManager(getContext()));
-        parseJSON();
-//        Log.i(TAG, "Food0ID:" + foodList.get(1).itemName);
-//        foodAdapter.notifyDataSetChanged();
 
-        editText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            }
+        btSearchAPI.setOnClickListener(
+                new View.OnClickListener()
+                {
+                    public void onClick(View view)
+                    {
+                        //Retrieves input of edit text
+                        String searchValue = editText.getText().toString();
+                        //Calls parseJSON function with the input of edit text replacing the %s in the url
+                        parseJSON(searchValue);
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                filter(s.toString());
-            }
-        });
-
-//        searchView = view.findViewById(R.id.svSearchFood);
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                foodAdapter.getFilter().filter(newText);
-//                return false;
-//            }
-//        });
-
+                    }
+                });
 
 
         btnCustomItem = view.findViewById(R.id.btnNewFood);
         btnCustomItem.setOnClickListener(this);
     }
 
-    private void filter (String text) {
-        ArrayList<Food> filteredList = new ArrayList<>();
 
-        for (Food item : foodList) {
-            if (item.getItemName().toLowerCase().contains(text.toLowerCase())) {
-                filteredList.add(item);
-            }
-        }
-
-        foodAdapter.filterList(filteredList);
-    }
-
-    private void parseJSON() {
+    //Retrieves JSON data
+    private void parseJSON(String text) {
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get(FOOD_DATABASE_URL, new JsonHttpResponseHandler() {
+        client.get(getUrl(text), new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json) {
                 Log.d(TAG, "onSuccess");
                 JSONObject jsonObject = json.jsonObject;
                 try {
                     JSONArray hints = jsonObject.getJSONArray("hints");
-//                    JSONObject results = hints.getJSONObject(0);
-//                    JSONObject food = results.getJSONObject("food");
                     Log.i(TAG, "Hints: " + hints.toString());
+                    foodList.clear();
                     foodList.addAll(Food.fromJsonArray(hints));
                     foodAdapter.notifyDataSetChanged();
                     Log.i(TAG, "Foods:" + foodList.size());
-                    Log.i(TAG, "Food0ID:" + foodList.get(1).itemName);
                 } catch (JSONException e) {
                     Log.e(TAG, "Hit json exception");
                     e.printStackTrace();
@@ -185,6 +153,11 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
         }
+    }
+
+    //Replaces the %s in the url to the string value that the user inputs into the edit text
+    public String getUrl(String search) {
+        return String.format("https://api.edamam.com/api/food-database/v2/parser?ingr=%s&app_id=ef0fa9fe&app_key=32407434c5090649349047ef7e8a4255", search);
     }
 }
 

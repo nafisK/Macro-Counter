@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
@@ -10,16 +10,35 @@
 <!--        android:actionViewClass="android.widget.SearchView"-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="wrap_content" />-->
+
+    <Button
+        android:id="@+id/btnSearchAPI"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="19dp"
+        android:layout_toEndOf="@+id/edit_text"
+        android:text="Search" />
+
     <EditText
         android:id="@+id/edit_text"
-        android:layout_width="match_parent"
+        android:layout_width="255dp"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"/>
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="19dp"
+        android:hint="Type food here!" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvFoods"
         android:layout_width="match_parent"
-        android:layout_height="397dp"
+        android:layout_height="381dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="129dp"
         android:padding="8dp" />
 
     <LinearLayout
@@ -31,14 +50,18 @@
         android:orientation="horizontal">
 
 
-        <Button
-            android:id="@+id/btnNewFood"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="30dp"
-            android:layout_weight="1"
-            android:text="Custom Item" />
-
     </LinearLayout>
 
-</LinearLayout>
+    <Button
+        android:id="@+id/btnNewFood"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="-2dp"
+        android:layout_marginBottom="52dp"
+        android:layout_weight="1"
+        android:text="Custom Item" />
+
+</RelativeLayout>

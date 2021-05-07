@@ -8,9 +8,8 @@ import java.util.ArrayList;
 //extends ParseObject
 //@ParseClassName("Food")
 public class Food {
-    public String itemName, calories, proteinCnt, fat, cholesterol, fiber;
+    public String itemName, calories, proteinCnt, fat, cholesterol, fiber, url;
     // Default constructor required for calls to
-
 
     public Food() {
     }
@@ -48,6 +47,8 @@ public class Food {
         this.cholesterol = cholesterol;
         this.fiber = fiber;
     }
+
+
 
     public String getItemName() {
         return itemName;
