@@ -1,5 +1,7 @@
 package com.example.macro_counter;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,20 +26,39 @@ public class Food {
     }
     public static ArrayList<Food> fromJsonArray(JSONArray foodJsonArray) throws JSONException {
         ArrayList<Food> foods = new ArrayList<>();
+        double fiber;
+
         for (int i = 0; i < foodJsonArray.length(); i++) {
             JSONObject hintObject = foodJsonArray.getJSONObject(i);
             JSONObject foodObject = hintObject.getJSONObject("food");
             JSONObject nutObject = foodObject.getJSONObject("nutrients");
 
             String foodLabel = foodObject.getString("label");
-            Integer calories = nutObject.getInt("ENERC_KCAL");
-            Double protein = nutObject.getDouble("PROCNT");
-            Double fat = nutObject.getDouble("FAT");
-            Double chol = nutObject.getDouble("CHOCDF");
-//                Double fiber = nutObject.getDouble("FIBTG");
+            int calories = nutObject.getInt("ENERC_KCAL");
+            double protein = nutObject.getDouble("PROCNT");
+            double fat = nutObject.getDouble("FAT");
+            double chol = nutObject.getDouble("CHOCDF");
+            try {
+                fiber = nutObject.getDouble("FIBTG");
+            }catch(JSONException e){
+                Log.i("Food", "Fiber does not exist");
+                fiber = 0.0;
+            }
+            //Double fiber = nutObject.getDouble("FIBTG");
 
-            foods.add(new Food(foodLabel, calories.toString(), protein.toString(), fat.toString(), chol.toString(), "0"));
+            //Log.i("Food", nutObject.getString("FIBTG"));
+            Log.i("Food", foodObject.getString("label"));
+
+
+            foods.add(new Food(foodLabel, String.valueOf(calories), String.valueOf(protein), String.valueOf(fat), String.valueOf(chol), String.valueOf(fiber)));
         }
+//        JSONObject hintObject = foodJsonArray.getJSONObject(0);
+//        JSONObject foodObject = hintObject.getJSONObject("food");
+//        JSONObject nutObject = foodObject.getJSONObject("nutrients");
+//        for(int i = 0; i < foodJsonArray.length(); i++) {
+//
+//        }
+
         return foods;
     }
 
