@@ -1,8 +1,11 @@
 package com.example.macro_counter.fragments;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -10,30 +13,18 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
 import com.example.macro_counter.FeedAdapter;
 import com.example.macro_counter.FeedModel;
-import com.example.macro_counter.Food;
 import com.example.macro_counter.R;
 import com.example.macro_counter.User;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import org.parceler.Parcels;
 
 public class ProfileFragment extends Fragment {
 
@@ -44,8 +35,15 @@ public class ProfileFragment extends Fragment {
     private String userEmail, uid;
     private TextView tvName, tvWeight, tvAge, tvDailyCalories, tvTotalCalories;
     User currUser;
-    private FirebaseDatabase database;
+    private DatabaseReference databaseRef;
     String email;
+
+    String searchKey="justinparkcs@gmail.com|May 07, 2021";
+    String[] str=searchKey.split("\\|");
+    String searchKey1=str[0];
+    String searchKey2=str[1];
+
+    final int[] cValue = {0};
 
 
     public ProfileFragment() {
@@ -79,11 +77,42 @@ public class ProfileFragment extends Fragment {
         uid = user.getUid();
 
 
+//        databaseRef = FirebaseDatabase.getInstance().getReference("Foods");
+//        databaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+//                    Log.i(TAG, "Looking at child!");
+//                    if(dataSnapshot1.child("email").exists()&&dataSnapshot1.child("timeStamp").exists()) {
+//                        if(dataSnapshot1.child("email").getValue().toString().equals(searchKey1)&&dataSnapshot1.child("timeStamp").getValue().toString().equals(searchKey2)) {
+//                            //Do What You Want To Do.
+//                            Log.i(TAG, "Match!");
+//                            dataSnapshot1.child("calories").getValue().toString();
+//                            cValue[0] += Integer.parseInt(String.valueOf(dataSnapshot1.child("calories").getValue()));
+//                            Log.i(TAG, "Current Total Food Calories: " + String.valueOf(cValue[0]));
+//                        }
+//                        else {
+//                            Log.i(TAG, "No Match!");
+//                        }
+//                    }
+//                    else {
+//                        Log.i(TAG, "children do not exist");
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
+
 
         mDatabase = FirebaseDatabase.getInstance().getReference("Users").child(uid);
         ValueEventListener userListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
                 // Get Post object and use the values to update the UI
                 User userProfile = dataSnapshot.getValue(User.class);
 
@@ -91,10 +120,12 @@ public class ProfileFragment extends Fragment {
                 tvWeight.setText(userProfile.getWeight());
                 tvAge.setText(userProfile.getAge());
                 // add daily caloric intake
-                // tvTotalCalories.setText(userProfile.calorieIntake);
+                Log.d(TAG, "Calorie Before setText: " + String.valueOf(cValue[0]));
+                 tvTotalCalories.setText(String.valueOf(cValue[0]));
+
                 tvTotalCalories.setText(userProfile.calorieIntake);
 
-                Log.d("ProfileFragment", String.valueOf(userProfile.getAge()));
+                //Log.d("ProfileFragment", String.valueOf(userProfile.getAge()));
 
             }
 
