@@ -77,35 +77,38 @@ public class ProfileFragment extends Fragment {
         uid = user.getUid();
 
 
-//        databaseRef = FirebaseDatabase.getInstance().getReference("Foods");
-//        databaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-//                    Log.i(TAG, "Looking at child!");
-//                    if(dataSnapshot1.child("email").exists()&&dataSnapshot1.child("timeStamp").exists()) {
-//                        if(dataSnapshot1.child("email").getValue().toString().equals(searchKey1)&&dataSnapshot1.child("timeStamp").getValue().toString().equals(searchKey2)) {
-//                            //Do What You Want To Do.
-//                            Log.i(TAG, "Match!");
-//                            dataSnapshot1.child("calories").getValue().toString();
-//                            cValue[0] += Integer.parseInt(String.valueOf(dataSnapshot1.child("calories").getValue()));
-//                            Log.i(TAG, "Current Total Food Calories: " + String.valueOf(cValue[0]));
-//                        }
-//                        else {
-//                            Log.i(TAG, "No Match!");
-//                        }
-//                    }
-//                    else {
-//                        Log.i(TAG, "children do not exist");
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
+        databaseRef = FirebaseDatabase.getInstance().getReference("Foods");
+        databaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                    Log.i(TAG, "Looking at child!");
+                    if(dataSnapshot1.child("email").exists()&&dataSnapshot1.child("timeStamp").exists()) {
+                        if(dataSnapshot1.child("email").getValue().toString().equals(searchKey1)&&dataSnapshot1.child("timeStamp").getValue().toString().equals(searchKey2)) {
+                            //Do What You Want To Do.
+                            Log.i(TAG, "Match!");
+                            dataSnapshot1.child("calories").getValue().toString();
+                            cValue[0] += Integer.parseInt(String.valueOf(dataSnapshot1.child("calories").getValue()));
+                            Log.i(TAG, "Current Total Food Calories: " + cValue[0]);
+                        }
+                        else {
+                            Log.i(TAG, "No Match!");
+                        }
+                    }
+                    else {
+                        Log.i(TAG, "children do not exist");
+                    }
+                }
+
+                Log.i(TAG, "Calorie Before setText: " + cValue[0]);
+                tvDailyCalories.setText(String.valueOf(cValue[0]));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
 
         mDatabase = FirebaseDatabase.getInstance().getReference("Users").child(uid);
@@ -119,9 +122,9 @@ public class ProfileFragment extends Fragment {
                 tvName.setText(userProfile.getName());
                 tvWeight.setText(userProfile.getWeight());
                 tvAge.setText(userProfile.getAge());
-                // add daily caloric intake
-                Log.d(TAG, "Calorie Before setText: " + String.valueOf(cValue[0]));
-                 tvTotalCalories.setText(String.valueOf(cValue[0]));
+//                // add daily caloric intake
+//                Log.i(TAG, "Calorie Before setText: " + cValue[0]);
+//                tvDailyCalories.setText(String.valueOf(cValue[0]));
 
                 tvTotalCalories.setText(userProfile.calorieIntake);
 
