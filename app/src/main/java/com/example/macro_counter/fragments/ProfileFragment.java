@@ -22,8 +22,11 @@ import com.example.macro_counter.Food;
 import com.example.macro_counter.R;
 import com.example.macro_counter.User;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,7 +42,7 @@ public class ProfileFragment extends Fragment {
     private DatabaseReference mDatabase;
     FeedAdapter adapter;
     private String userEmail, uid;
-    private TextView tvName, tvWeight, tvAge;
+    private TextView tvName, tvWeight, tvAge, tvDailyCalories, tvTotalCalories;
     User currUser;
     private FirebaseDatabase database;
     String email;
@@ -62,6 +65,11 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        tvName = view.findViewById(R.id.tvName);
+        tvWeight = view.findViewById(R.id.tvWeight);
+        tvAge = view.findViewById(R.id.tvAge);
+        tvDailyCalories = view.findViewById(R.id.tvDailyCalories);
+        tvTotalCalories = view.findViewById(R.id.tvTotalCalories);
 
         rvFeed = (RecyclerView) view.findViewById(R.id.rvFeed);
         rvFeed.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -71,37 +79,33 @@ public class ProfileFragment extends Fragment {
         uid = user.getUid();
 
 
-        /* Attempt for profile activity user's information
-        currUser = new User();
-        tvName = view.findViewById(R.id.tvName);
-        tvWeight = view.findViewById(R.id.tvWeight);
-        tvAge = view.findViewById(R.id.tvAge);
 
-        database = FirebaseDatabase.getInstance();
-        mDatabase = database.getReference("Users");
-
-        Intent intent = getActivity().getIntent();
-        email = intent.getStringExtra("email");
-
-
-        mDatabase.addValueEventListener(new ValueEventListener() {
+        mDatabase = FirebaseDatabase.getInstance().getReference("Users").child(uid);
+        ValueEventListener userListener = new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot ds : snapshot.getChildren()) {
-                    if (ds.child("email").equals(email)) {
-                        tvName.setText(ds.child("name").getValue(String.class));
-                        tvWeight.setText(ds.child("weight").getValue(String.class));
-                        tvAge.setText(ds.child("age").getValue(String.class));
-                    }
-                }
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Get Post object and use the values to update the UI
+                User userProfile = dataSnapshot.getValue(User.class);
+
+                tvName.setText(userProfile.getName());
+                tvWeight.setText(userProfile.getWeight());
+                tvAge.setText(userProfile.getAge());
+                // add daily caloric intake
+                // tvTotalCalories.setText(userProfile.calorieIntake);
+                tvTotalCalories.setText(userProfile.calorieIntake);
+
+                Log.d("ProfileFragment", String.valueOf(userProfile.getAge()));
+
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.d(TAG, "onCancelled", error.toException());
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
             }
-        });
-        */
+        };
+        mDatabase.addValueEventListener(userListener);
+
 
         FirebaseRecyclerOptions<FeedModel> options =
                 new FirebaseRecyclerOptions.Builder<FeedModel>()
