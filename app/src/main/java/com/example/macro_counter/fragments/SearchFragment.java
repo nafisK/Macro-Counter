@@ -17,10 +17,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -85,6 +88,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
         EditText editText = view.findViewById(R.id.edit_text);
         btSearchAPI = view.findViewById(R.id.btnSearchAPI);
 
+
                 foodList = new ArrayList<>();
         foodAdapter = new FoodAdapter(getContext(), foodList);
 
@@ -108,7 +112,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                         String searchValue = editText.getText().toString();
                         //Calls parseJSON function with the input of edit text replacing the %s in the url
                         parseJSON(searchValue);
-
+                        editText.onEditorAction(EditorInfo.IME_ACTION_DONE);
                     }
                 });
 
@@ -142,6 +146,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onFailure(int statusCode, Headers headers, String s, Throwable throwable) {
                 Log.d(TAG, "onFailure");
+                Toast.makeText(getContext(), "Type something!", Toast.LENGTH_SHORT).show();
             }
         });
     }

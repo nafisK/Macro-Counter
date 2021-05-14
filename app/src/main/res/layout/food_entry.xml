@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -8,31 +8,48 @@
 
     <TextView
         android:id="@+id/tvAdapterFoodName"
-        android:layout_width="wrap_content"
+        android:layout_width="115dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:ellipsize="end"
+        android:maxLines="1"
         tools:text="Apple" />
 
-    <TextView
-        android:id="@+id/tvAdapterCalories"
-        android:layout_width="10dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        tools:text="Calories: " />
+<!--    <TextView-->
+<!--        android:id="@+id/tvAdapterCalories"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_centerVertical="true"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:layout_marginEnd="23dp"-->
+<!--        android:layout_toStartOf="@+id/tvAdapterCaloriesValue"-->
+<!--        android:layout_weight="1"-->
+<!--        tools:text="Cal: " />-->
 
     <TextView
         android:id="@+id/tvAdapterCaloriesValue"
-        android:layout_width="2dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        tools:text="100" />
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@id/tvAdapterFoodName"
+        tools:text="200" />
 
     <Button
         android:id="@+id/btnAdapterAdd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:scaleX="0.8"
-        android:scaleY="0.8"
-        android:text="Add" />
-</LinearLayout>
+        android:layout_width="70dp"
+        android:layout_height="36dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="20dp"
+        android:maxLines="1"
+        android:text="Add"
+        android:textSize="12sp" />
+</RelativeLayout>
