@@ -1,5 +1,6 @@
 package com.example.macro_counter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,7 +44,7 @@ public class FeedAdapter_2 extends RecyclerView.Adapter<FeedAdapter_2.MyViewHold
         holder.proteins.setText(model.getProteinCnt());
 
         // Parsing and Outputting TimeStamp
-        SimpleDateFormat formattedDate = new SimpleDateFormat("MMMM dd, Y");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat formattedDate = new SimpleDateFormat("MMMM dd, Y");
         String timeStamp = formattedDate.format(model.getTimeInMillis());
         holder.timePosted.setText(timeStamp);
 
