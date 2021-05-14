@@ -64,7 +64,6 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
             super(itemView);
             tvFoodName = itemView.findViewById(R.id.tvFoodName);
             tvCalNumber = itemView.findViewById(R.id.tvCalNumber);
-
             container = itemView.findViewById(R.id.container);
             btAddFood = itemView.findViewById(R.id.btAddFood);
         }

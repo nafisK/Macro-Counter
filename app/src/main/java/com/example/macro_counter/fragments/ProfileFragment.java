@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,7 +15,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.macro_counter.FeedAdapter;
+import com.example.macro_counter.FeedAdapter_2;
 import com.example.macro_counter.FeedModel;
+import com.example.macro_counter.ProfileFeedAdapter;
 import com.example.macro_counter.R;
 import com.example.macro_counter.User;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -26,12 +29,22 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+
 public class ProfileFragment extends Fragment {
 
     public static final String TAG = "ProfileFragment";
     private RecyclerView rvFeed;
     private DatabaseReference mDatabase;
+    private DatabaseReference foodDatabaseRef;
+
     FeedAdapter adapter;
+//    FeedAdapter_2 adapter;
+//    ProfileFeedAdapter adapter;
+    ArrayList<FeedModel> list;
+
     private String userEmail, uid;
     private TextView tvName, tvWeight, tvAge, tvDailyCalories, tvTotalCalories;
     User currUser;
@@ -63,14 +76,13 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // User Section
+
         tvName = view.findViewById(R.id.tvName);
         tvWeight = view.findViewById(R.id.tvWeight);
         tvAge = view.findViewById(R.id.tvAge);
         tvDailyCalories = view.findViewById(R.id.tvDailyCalories);
         tvTotalCalories = view.findViewById(R.id.tvTotalCalories);
-
-        rvFeed = (RecyclerView) view.findViewById(R.id.rvFeed);
-        rvFeed.setLayoutManager(new LinearLayoutManager(getContext()));
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         userEmail = user.getEmail();
@@ -139,6 +151,11 @@ public class ProfileFragment extends Fragment {
             }
         };
         mDatabase.addValueEventListener(userListener);
+
+        // Recycler View Section
+
+        rvFeed = (RecyclerView) view.findViewById(R.id.rvFeed);
+        rvFeed.setLayoutManager(new LinearLayoutManager(getContext()));
 
 
         FirebaseRecyclerOptions<FeedModel> options =

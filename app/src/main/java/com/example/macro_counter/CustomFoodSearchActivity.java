@@ -69,7 +69,8 @@ public class CustomFoodSearchActivity extends AppCompatActivity implements OnCli
 
         // Connecting object of required Adapter class to
         // the Adapter class itself
-        adapter = new FoodAdapterFb(options);
+//        adapter = new FoodAdapterFb(options);
+        adapter = new FoodAdapterFb(options, getApplicationContext());
 
         // Connecting Adapter class with the Recycler view
         recyclerView.setAdapter(adapter);

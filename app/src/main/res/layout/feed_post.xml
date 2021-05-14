@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/feedPostContainer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
@@ -37,30 +38,27 @@
         android:layout_height="30dp"
         android:layout_below="@id/username"
         android:layout_toRightOf="@id/itemNameText"
-        android:text="Apple"
-        />
+        android:text="Apple" />
 
 
-        <TextView
-            android:id="@+id/calories"
-            android:text="2000"
-            android:layout_width="wrap_content"
-            android:layout_below="@id/timePosted"
-            android:layout_height="30dp"
-            android:layout_alignParentRight="true"
-            />
+    <TextView
+        android:id="@+id/calories"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_below="@id/timePosted"
+        android:layout_alignParentRight="true"
+        android:text="2000" />
 
 
     <TextView
         android:id="@+id/CalText"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:height="30dp"
-        android:layout_marginTop="0dp"
         android:layout_below="@id/timePosted"
+        android:layout_marginTop="0dp"
         android:layout_toLeftOf="@id/calories"
-        android:text="Calories: "
-        />
+        android:height="30dp"
+        android:text="Calories: " />
 
 
     <TextView
@@ -76,22 +74,20 @@
         android:id="@+id/proteins"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
+        android:layout_below="@id/itemName"
         android:layout_marginTop="0dp"
         android:layout_toRightOf="@id/proteinsText"
-        android:layout_below="@id/itemName"
-        android:text="200"
-        />
+        android:text="200" />
 
     <TextView
         android:id="@+id/fiberText"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_below="@+id/itemName"
-        android:layout_marginTop="0dp"
         android:layout_marginLeft="50dp"
+        android:layout_marginTop="0dp"
         android:layout_toRightOf="@id/proteins"
-        android:text="Fiber: "
-        />
+        android:text="Fiber: " />
 
     <TextView
         android:id="@+id/fiber"
@@ -100,8 +96,7 @@
         android:layout_below="@+id/itemName"
         android:layout_marginTop="0dp"
         android:layout_toRightOf="@id/fiberText"
-        android:text="500"
-        />
+        android:text="500" />
 
 
     <TextView
@@ -109,10 +104,10 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_below="@+id/itemName"
-        android:layout_marginTop="0dp"
         android:layout_marginLeft="50dp"
+        android:layout_marginTop="0dp"
         android:layout_toRightOf="@id/fiber"
-        android:text="Fats: "/>
+        android:text="Fats: " />
 
     <TextView
         android:id="@+id/fats"
@@ -121,13 +116,13 @@
         android:layout_below="@+id/itemName"
         android:layout_marginTop="0dp"
         android:layout_toRightOf="@id/fatsText"
-        android:text="200"/>
+        android:text="200" />
 
     <View
         android:id="@+id/divider"
-        android:layout_below="@+id/proteins"
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_below="@+id/proteins"
         android:background="?android:attr/listDivider" />
 
 

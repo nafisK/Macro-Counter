@@ -10,7 +10,7 @@ import java.util.ArrayList;
 @Parcel
 public class Food {
     public String itemName, calories, proteinCnt, fat, cholesterol, fiber, username, email;
-//    public long timeStamp;
+    public long timeInMillis;
     public String timeStamp;
     // Default constructor required for calls to
 
@@ -109,9 +109,9 @@ public class Food {
 
     public void setEmail(String email) { this.email = email; }
 
-//    public void setTimeStamp(long timeStamp) { this.timeStamp = timeStamp; }
-//
-//    public long getTimeStamp() { return timeStamp; }
+    public void setTimeInMillis(long timeInMillis) { this.timeInMillis = timeInMillis; }
+
+    public long getTimeInMillis() { return timeInMillis; }
 
     public void setTimeStamp(String timeStamp) { this.timeStamp = timeStamp; }
 
