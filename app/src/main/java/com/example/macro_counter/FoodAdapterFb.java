@@ -35,12 +35,12 @@ public class FoodAdapterFb extends FirebaseRecyclerAdapter<Food, FoodAdapterFb.F
         // view (here "food_entry.xml")
         holder.tvAdapterFoodName.setText(model.getItemName());
 
-        holder.tvAdapterCalories.setText("Calories:");
+//        holder.tvAdapterCalories.setText("Cal:");
 
         // Add calorie value from model class (here
         // "Food.class")to appropriate view in Card
         // view (here "food_entry.xml")
-        holder.tvAdapterCaloriesValue.setText(model.getCalories());
+        holder.tvAdapterCaloriesValue.setText("Cal:" + model.getCalories());
     }
 
 
@@ -66,7 +66,7 @@ public class FoodAdapterFb extends FirebaseRecyclerAdapter<Food, FoodAdapterFb.F
             super(itemView);
 
             tvAdapterFoodName = itemView.findViewById(R.id.tvAdapterFoodName);
-            tvAdapterCalories = itemView.findViewById(R.id.tvAdapterCalories);
+//            tvAdapterCalories = itemView.findViewById(R.id.tvAdapterCalories);
             tvAdapterCaloriesValue = itemView.findViewById(R.id.tvAdapterCaloriesValue);
             btnAdapterAdd = itemView.findViewById(R.id.btnAdapterAdd);
         }
