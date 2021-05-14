@@ -26,6 +26,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class ProfileFragment extends Fragment {
 
     public static final String TAG = "ProfileFragment";
@@ -38,10 +41,13 @@ public class ProfileFragment extends Fragment {
     private DatabaseReference databaseRef;
     String email;
 
-    String searchKey="justinparkcs@gmail.com|May 07, 2021";
-    String[] str=searchKey.split("\\|");
-    String searchKey1=str[0];
-    String searchKey2=str[1];
+    Date currDate = new Date();
+    SimpleDateFormat formattedDate = new SimpleDateFormat("MMMM dd, Y");
+    String timeStamp = formattedDate.format(currDate);
+
+//    String searchKey="justinparkcs@gmail.com|May 07, 2021";
+//    String[] str=searchKey.split("\\|");
+
 
     final int[] cValue = {0};
 
@@ -76,6 +82,8 @@ public class ProfileFragment extends Fragment {
         userEmail = user.getEmail();
         uid = user.getUid();
 
+        String searchKey1=userEmail;
+        String searchKey2=timeStamp;
 
         databaseRef = FirebaseDatabase.getInstance().getReference("Foods");
         databaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
