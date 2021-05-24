@@ -12,6 +12,7 @@ public class Food {
     public String itemName, calories, proteinCnt, fat, cholesterol, fiber, username, email;
     public long timeInMillis;
     public String timeStamp;
+
     // Default constructor required for calls to
 
     public Food() {
