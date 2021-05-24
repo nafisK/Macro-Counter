@@ -1,11 +1,14 @@
 package com.example.macro_counter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,34 +16,42 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 
+import org.jetbrains.annotations.NotNull;
+import org.parceler.Parcels;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class FoodAdapterFb extends FirebaseRecyclerAdapter<Food, FoodAdapterFb.FoodsViewholder> {
+    private Context context;
+
+    public FoodAdapterFb(@NonNull @NotNull FirebaseRecyclerOptions<Food> options, Context context) {
+        super(options);
+        this.context = context;
+    }
 
     public FoodAdapterFb(@NonNull FirebaseRecyclerOptions<Food> options) {
         super(options);
     }
-    // Function to bind the view in Food Entry view(here
-    // "food_entry.xml") with data in
-    // model class(here "Food.class")
+
     @Override
     protected void
-    onBindViewHolder(@NonNull FoodsViewholder holder,
-                     int position, @NonNull Food model)
-    {
+    onBindViewHolder(@NonNull FoodsViewholder holder, int position, @NonNull Food model)     {
 
-        // Add food name from model class (here
-        // "Food.class")to appropriate view in Card
-        // view (here "food_entry.xml")
         holder.tvAdapterFoodName.setText(model.getItemName());
+        holder.tvAdapterCalories.setText("Cal:");
+        holder.tvAdapterCaloriesValue.setText(model.getCalories());
 
-//        holder.tvAdapterCalories.setText("Cal:");
-
-        // Add calorie value from model class (here
-        // "Food.class")to appropriate view in Card
-        // view (here "food_entry.xml")
-        holder.tvAdapterCaloriesValue.setText("Cal:" + model.getCalories());
+//        holder.RLcontainer.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(context, model.getItemName(), Toast.LENGTH_SHORT).show();
+//
+////                Intent i = new Intent(context, SearchDetailActivity.class);
+////                i.putExtra("food", Parcels.wrap(model));
+////                context.startActivity(i);
+//            }
+//        });
     }
 
 
@@ -61,6 +72,7 @@ public class FoodAdapterFb extends FirebaseRecyclerAdapter<Food, FoodAdapterFb.F
     class FoodsViewholder extends RecyclerView.ViewHolder {
         TextView tvAdapterFoodName, tvAdapterCalories, tvAdapterCaloriesValue;
         Button btnAdapterAdd;
+        RelativeLayout RLcontainer;
 
         public FoodsViewholder(@NonNull View itemView) {
             super(itemView);
@@ -69,7 +81,10 @@ public class FoodAdapterFb extends FirebaseRecyclerAdapter<Food, FoodAdapterFb.F
 //            tvAdapterCalories = itemView.findViewById(R.id.tvAdapterCalories);
             tvAdapterCaloriesValue = itemView.findViewById(R.id.tvAdapterCaloriesValue);
             btnAdapterAdd = itemView.findViewById(R.id.btnAdapterAdd);
+            RLcontainer = itemView.findViewById(R.id.container);
         }
+
+
     }
 
 }

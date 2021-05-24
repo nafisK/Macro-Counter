@@ -11,6 +11,8 @@ public class FeedModel {
     String itemName;
     String proteinCnt;
     String timeStamp;
+    long timeInMillis;
+
 
 
     public FeedModel() {
@@ -42,5 +44,8 @@ public class FeedModel {
     public void setItemName(String itemName) { this.itemName = itemName; }
     public void setProteinCnt(String proteinCnt) { this.proteinCnt = proteinCnt; }
     public void setTimeStamp(String timeStamp) { this.timeStamp = timeStamp; }
+    public long getTimeInMillis() { return timeInMillis; }
+    public void setTimeInMillis(long timeInMillis) { this.timeInMillis = timeInMillis; }
+
 
 }
