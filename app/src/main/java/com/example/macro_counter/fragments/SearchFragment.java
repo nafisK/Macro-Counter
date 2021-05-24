@@ -88,8 +88,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
         EditText editText = view.findViewById(R.id.edit_text);
         btSearchAPI = view.findViewById(R.id.btnSearchAPI);
 
-
-                foodList = new ArrayList<>();
+        foodList = new ArrayList<>();
         foodAdapter = new FoodAdapter(getContext(), foodList);
 
         //Steps to use the recycler view:
