@@ -40,7 +40,7 @@ import java.util.List;
 
 public class CustomFoodSearchActivity extends AppCompatActivity implements OnClickListener{
 
-    public static final String TAG = "CustomFoodSearchActivit";
+    public static final String TAG = "CustomFoodSearchActivity";
     private RecyclerView recyclerView;
     FoodAdapterFb adapter;
     FoodAdapterFb adapter1;
@@ -84,8 +84,8 @@ public class CustomFoodSearchActivity extends AppCompatActivity implements OnCli
 
         // Connecting object of required Adapter class to
         // the Adapter class itself
-//        adapter = new FoodAdapterFb(options);
-        adapter = new FoodAdapterFb(options, getApplicationContext());
+        adapter = new FoodAdapterFb(options);
+//        adapter = new FoodAdapterFb(options, getApplicationContext());
 
         // Connecting Adapter class with the Recycler view
         recyclerView.setAdapter(adapter);

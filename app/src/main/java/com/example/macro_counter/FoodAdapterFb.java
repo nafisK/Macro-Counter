@@ -25,11 +25,6 @@ import java.util.List;
 public class FoodAdapterFb extends FirebaseRecyclerAdapter<Food, FoodAdapterFb.FoodsViewholder> {
     private Context context;
 
-    public FoodAdapterFb(@NonNull @NotNull FirebaseRecyclerOptions<Food> options, Context context) {
-        super(options);
-        this.context = context;
-    }
-
     public FoodAdapterFb(@NonNull FirebaseRecyclerOptions<Food> options) {
         super(options);
     }
@@ -39,19 +34,8 @@ public class FoodAdapterFb extends FirebaseRecyclerAdapter<Food, FoodAdapterFb.F
     onBindViewHolder(@NonNull FoodsViewholder holder, int position, @NonNull Food model)     {
 
         holder.tvAdapterFoodName.setText(model.getItemName());
-        holder.tvAdapterCalories.setText("Cal:");
         holder.tvAdapterCaloriesValue.setText(model.getCalories());
 
-//        holder.RLcontainer.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(context, model.getItemName(), Toast.LENGTH_SHORT).show();
-//
-////                Intent i = new Intent(context, SearchDetailActivity.class);
-////                i.putExtra("food", Parcels.wrap(model));
-////                context.startActivity(i);
-//            }
-//        });
     }
 
 
