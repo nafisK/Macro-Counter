@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 
+import java.text.SimpleDateFormat;
+
 public class FeedAdapter extends FirebaseRecyclerAdapter<FeedModel, FeedAdapter.ViewHolder> {
 
     private final String TAG = "FEED ACTIVITY";
@@ -30,8 +32,6 @@ public class FeedAdapter extends FirebaseRecyclerAdapter<FeedModel, FeedAdapter.
 
         TextView username, email, timePosted, itemName, calories, proteins, fiber, fat;
 
-
-
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             // EMAIL WILL BE CHANGED TO USERNAME WHEN THE BUG IS FIXED
@@ -44,8 +44,11 @@ public class FeedAdapter extends FirebaseRecyclerAdapter<FeedModel, FeedAdapter.
             fiber = itemView.findViewById(R.id.fiber);
             fat = itemView.findViewById(R.id.fats);
 
+
+
         }
     }
+
 
     @Override
     protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull FeedModel model) {
@@ -56,7 +59,10 @@ public class FeedAdapter extends FirebaseRecyclerAdapter<FeedModel, FeedAdapter.
         holder.fiber.setText(model.getFiber());
         holder.itemName.setText(model.getItemName());
         holder.proteins.setText(model.getProteinCnt());
-        holder.timePosted.setText(model.getTimeStamp());
+        // Parsing and Outputting TimeStamp
+        SimpleDateFormat formattedDate = new SimpleDateFormat("MMMM dd, Y");
+        String timeStamp = formattedDate.format(model.getTimeInMillis());
+        holder.timePosted.setText(timeStamp);
 
     }
 

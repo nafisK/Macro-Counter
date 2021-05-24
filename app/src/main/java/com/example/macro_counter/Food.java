@@ -10,7 +10,7 @@ import java.util.ArrayList;
 @Parcel
 public class Food {
     public String itemName, calories, proteinCnt, fat, cholesterol, fiber, username, email;
-//    public long timeStamp;
+    public long timeInMillis;
     public String timeStamp;
     // Default constructor required for calls to
 
@@ -31,9 +31,9 @@ public class Food {
 
             String foodLabel = foodObject.getString("label");
             Integer calories = nutObject.getInt("ENERC_KCAL");
-            Double protein = nutObject.getDouble("PROCNT");
-            Double fat = nutObject.getDouble("FAT");
-            Double chol = nutObject.getDouble("CHOCDF");
+            Double protein = roundAvoid(nutObject.getDouble("PROCNT"), 2) ;
+            Double fat = roundAvoid(nutObject.getDouble("FAT"), 2) ;
+            Double chol = roundAvoid(nutObject.getDouble("CHOCDF"), 2) ;
 //                Double fiber = nutObject.getDouble("FIBTG");
 
             foods.add(new Food(foodLabel, calories.toString(), protein.toString(), fat.toString(), chol.toString(), "0"));
@@ -109,14 +109,18 @@ public class Food {
 
     public void setEmail(String email) { this.email = email; }
 
-//    public void setTimeStamp(long timeStamp) { this.timeStamp = timeStamp; }
-//
-//    public long getTimeStamp() { return timeStamp; }
+    public void setTimeInMillis(long timeInMillis) { this.timeInMillis = timeInMillis; }
+
+    public long getTimeInMillis() { return timeInMillis; }
 
     public void setTimeStamp(String timeStamp) { this.timeStamp = timeStamp; }
 
     public String getTimeStamp() { return timeStamp; }
 
+    public static double roundAvoid(double value, int places) {
+        double scale = Math.pow(10, places);
+        return Math.round(value * scale) / scale;
+    }
 
 }
 
