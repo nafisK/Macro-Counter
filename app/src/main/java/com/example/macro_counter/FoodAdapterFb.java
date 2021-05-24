@@ -39,7 +39,7 @@ public class FoodAdapterFb extends FirebaseRecyclerAdapter<Food, FoodAdapterFb.F
     onBindViewHolder(@NonNull FoodsViewholder holder, int position, @NonNull Food model)     {
 
         holder.tvAdapterFoodName.setText(model.getItemName());
-        holder.tvAdapterCalories.setText("Calories:");
+        holder.tvAdapterCalories.setText("Cal:");
         holder.tvAdapterCaloriesValue.setText(model.getCalories());
 
 //        holder.RLcontainer.setOnClickListener(new View.OnClickListener() {
@@ -52,7 +52,6 @@ public class FoodAdapterFb extends FirebaseRecyclerAdapter<Food, FoodAdapterFb.F
 ////                context.startActivity(i);
 //            }
 //        });
-
     }
 
 
@@ -79,7 +78,7 @@ public class FoodAdapterFb extends FirebaseRecyclerAdapter<Food, FoodAdapterFb.F
             super(itemView);
 
             tvAdapterFoodName = itemView.findViewById(R.id.tvAdapterFoodName);
-            tvAdapterCalories = itemView.findViewById(R.id.tvAdapterCalories);
+//            tvAdapterCalories = itemView.findViewById(R.id.tvAdapterCalories);
             tvAdapterCaloriesValue = itemView.findViewById(R.id.tvAdapterCaloriesValue);
             btnAdapterAdd = itemView.findViewById(R.id.btnAdapterAdd);
             RLcontainer = itemView.findViewById(R.id.container);
