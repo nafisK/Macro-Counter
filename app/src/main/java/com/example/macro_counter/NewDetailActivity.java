@@ -129,11 +129,6 @@ public class NewDetailActivity extends AppCompatActivity implements View.OnClick
             food.setUsername(name);
             food.setEmail(user.getEmail());
 
-            // Sets timestramp as a long
-            long timestamp = currentTimeMillis();
-            food.setTimeInMillis(timestamp);
-
-            Log.i(TAG, "AFTER WRTING THE LONG: " + timestamp);
 
             // Sets timestamp as a String
             Date currDate = new Date();
