@@ -40,6 +40,7 @@ public class ProfileFragment extends Fragment {
 
     public static final String TAG = "ProfileFragment";
     private RecyclerView rvFeed;
+    private LinearLayoutManager mLayoutManager;
     private DatabaseReference mDatabase;
     private DatabaseReference foodDatabaseRef;
 
@@ -161,9 +162,12 @@ public class ProfileFragment extends Fragment {
         mDatabase.addValueEventListener(userListener);
 
         // Recycler View Section
-
+        // Here you modify your LinearLayoutManager
+        mLayoutManager = new LinearLayoutManager(getContext());
+        mLayoutManager.setReverseLayout(true);
+        mLayoutManager.setStackFromEnd(true);
         rvFeed = (RecyclerView) view.findViewById(R.id.rvFeed);
-        rvFeed.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvFeed.setLayoutManager(mLayoutManager);
 
 
         FirebaseRecyclerOptions<FeedModel> options =

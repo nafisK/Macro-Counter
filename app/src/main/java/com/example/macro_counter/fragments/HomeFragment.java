@@ -44,6 +44,7 @@ public class HomeFragment extends Fragment {
     public static final String TAG = "HomeFragment";
 
     private RecyclerView rvFeed;
+    private LinearLayoutManager mLayoutManager;
     private DatabaseReference database;
 //    FeedAdapter adapter;
     FeedAdapter_2 adapter;
@@ -68,10 +69,15 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // Here you modify your LinearLayoutManager
+        mLayoutManager = new LinearLayoutManager(getContext());
+        mLayoutManager.setReverseLayout(true);
+        mLayoutManager.setStackFromEnd(true);
+
         rvFeed = (RecyclerView) view.findViewById(R.id.rvFeed);
         database = FirebaseDatabase.getInstance().getReference("Foods");
         rvFeed.setHasFixedSize(true);
-        rvFeed.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvFeed.setLayoutManager(mLayoutManager);
 
         list = new ArrayList<>();
 
