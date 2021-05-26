@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 import org.jetbrains.annotations.NotNull;
 import org.parceler.Parcels;
@@ -24,6 +26,7 @@ import java.util.List;
 
 public class FoodAdapterFb extends FirebaseRecyclerAdapter<Food, FoodAdapterFb.FoodsViewholder> {
     private Context context;
+    private OnItemClickListener listener;
 
     public FoodAdapterFb(@NonNull FirebaseRecyclerOptions<Food> options) {
         super(options);
@@ -48,7 +51,7 @@ public class FoodAdapterFb extends FirebaseRecyclerAdapter<Food, FoodAdapterFb.F
                        int viewType)
     {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.food_entry, parent, false);
-        return new FoodAdapterFb.FoodsViewholder(view);
+        return new FoodsViewholder(view);
     }
 
     // Sub Class to create references of the views in Crad
@@ -66,9 +69,25 @@ public class FoodAdapterFb extends FirebaseRecyclerAdapter<Food, FoodAdapterFb.F
             tvAdapterCaloriesValue = itemView.findViewById(R.id.tvAdapterCaloriesValue);
             btnAdapterAdd = itemView.findViewById(R.id.btnAdapterAdd);
             RLcontainer = itemView.findViewById(R.id.container);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION && listener != null) {
+                        listener.onItemClick(getSnapshots().getSnapshot(position), position);
+                    }
+                }
+            });
         }
 
 
+    }
+    public interface OnItemClickListener {
+        void onItemClick(DataSnapshot dataSnapshot, int position);
+    }
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.listener = listener;
     }
 
 }

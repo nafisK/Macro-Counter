@@ -51,6 +51,8 @@ public class CustomFoodSearchActivity extends AppCompatActivity implements OnCli
     private BottomNavigationView bottomNavigationView;
     private Query databaseRef;
     private Query foodQuery;
+    List<Food> foodList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,7 +102,7 @@ public class CustomFoodSearchActivity extends AppCompatActivity implements OnCli
                         FirebaseRecyclerOptions<Food> options1 = new FirebaseRecyclerOptions.Builder<Food>()
                         .setQuery(FirebaseDatabase.getInstance().getReference().child("Foods").orderByChild("itemName").startAt(searchValue).endAt(searchValue + "\uf8ff"), Food.class)
                                 .build();
-                        Log.d(TAG, "onSuccess");
+
                         adapter1 = new FoodAdapterFb(options1);
 
                         // Connecting Adapter class with the Recycler view
@@ -115,6 +117,18 @@ public class CustomFoodSearchActivity extends AppCompatActivity implements OnCli
 
         btnNewFood = findViewById(R.id.btnNewFood);
         btnNewFood.setOnClickListener(this);
+
+        adapter.setOnItemClickListener(new FoodAdapterFb.OnItemClickListener() {
+            @Override
+            public void onItemClick(DataSnapshot dataSnapshot, int position) {
+                Food foodObj = dataSnapshot.getValue(Food.class);
+                Toast.makeText(CustomFoodSearchActivity.this,
+                        "position: " + position + " FoodObj: " + foodObj.itemName,
+                        Toast.LENGTH_SHORT).show();
+                foodList = new ArrayList<>();
+
+            }
+        });
 
     }
 
