@@ -100,7 +100,7 @@ public class CustomFoodSearchActivity extends AppCompatActivity implements OnCli
                         FirebaseRecyclerOptions<Food> options1 = new FirebaseRecyclerOptions.Builder<Food>()
                         .setQuery(FirebaseDatabase.getInstance().getReference().child("Foods").orderByChild("itemName").startAt(searchValue).endAt(searchValue + "\uf8ff"), Food.class)
                                 .build();
-
+                        Log.d(TAG, "onSuccess");
                         adapter1 = new FoodAdapterFb(options1);
 
                         // Connecting Adapter class with the Recycler view

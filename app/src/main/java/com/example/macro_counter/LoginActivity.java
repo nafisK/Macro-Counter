@@ -35,6 +35,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mAuth = FirebaseAuth.getInstance();
+
+        // Retain Login: checking if user is already logged in
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
+            Intent i = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(i);
+        }
+
         setContentView(R.layout.activity_login);
 
 
@@ -50,8 +59,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         progressBar = findViewById(R.id.progressBar);
 
-        mAuth = FirebaseAuth.getInstance();
+//        mAuth = FirebaseAuth.getInstance();
     }
+
+
 
     @Override
     public void onClick(View v) {
@@ -62,6 +73,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.btnLogin:
                 userLogin();
+
                 break;
             case R.id.tvForgotPassword:
                 startActivity(new Intent(this, ForgotPasswordActivity.class));
