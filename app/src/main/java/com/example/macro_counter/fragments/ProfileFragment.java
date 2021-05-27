@@ -98,8 +98,6 @@ public class ProfileFragment extends Fragment {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         userEmail = user.getEmail();
         uid = user.getUid();
-        name = user.getDisplayName();
-        Log.d(TAG, "PRINTING DISPLAY NAME: " + name);
 
         String searchKey1 = userEmail;
         String searchKey2 = timeStamp;
@@ -145,6 +143,7 @@ public class ProfileFragment extends Fragment {
                 User userProfile = dataSnapshot.getValue(User.class);
 
                 tvName.setText(userProfile.getName());
+                name = userProfile.getName();
                 tvWeight.setText(userProfile.getWeight());
                 tvAge.setText(userProfile.getAge());
 //                // add daily caloric intake
@@ -164,6 +163,11 @@ public class ProfileFragment extends Fragment {
             }
         };
         mDatabase.addValueEventListener(userListener);
+
+
+
+
+
 
         // Recycler View Section
 
@@ -185,6 +189,7 @@ public class ProfileFragment extends Fragment {
                     FeedModel feedModel = dataSnapshot.getValue(FeedModel.class);
                     String email = feedModel.getEmail();
                     if (userEmail.equals(email)) {
+                        feedModel.setEmail(name);
                         list.add(feedModel);
                     }
 

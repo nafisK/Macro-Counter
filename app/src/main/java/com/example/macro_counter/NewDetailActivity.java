@@ -16,10 +16,17 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -29,17 +36,16 @@ import static java.lang.System.currentTimeMillis;
 
 public class NewDetailActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private String TAG = "NewDetailActivity";
+
     private EditText etItemName, etCalories, etProteinCnt, etFat, etCholesterolCDF, etFiber;
     private Button btnCancel, btnApply;
 
     private DatabaseReference mDatabase;
+    private DatabaseReference db;
     private FirebaseAuth mAuth;
+    String userName;
 
-    private Map mapTimeStamp = new HashMap();
-    private Map mapUser = new HashMap();
-
-
-    private String TAG = "NewDetailActivity";
 
 
     @Override
@@ -123,10 +129,48 @@ public class NewDetailActivity extends AppCompatActivity implements View.OnClick
         String foodPostKey = database.getReference("FoodPost").push().getKey();
         String foodKey = database.getReference("Foods").push().getKey();
 
+
+
+        // DOES GET EMAIL PROPERLY
+        String email = user.getEmail();
+
         if (user != null) {
-            // User is signed in
-            String name = user.getDisplayName();
-            food.setUsername(name);
+
+            // Goes through users to match the email of foods to email of users
+            db = FirebaseDatabase.getInstance().getReference("Users");
+            db.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        User users = dataSnapshot.getValue(User.class);
+                        if (email.equals(users.getEmail())) {
+
+
+                            // trying to make the userName get the name but it returns a null for some reason
+                            // @Justin take a look here
+//                            userName = users.getName();
+//                            x[0] = userName;
+//                            System.out.println("PRINTING FOOD USER NAME: " + userName);
+//
+
+
+
+                            
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                }
+            });
+
+
+            food.setUsername(userName);
+//            System.out.println("PRINTING USER NAME:" + userName);
+//            System.out.println("PRINTING USER NAME:" + food.getUsername());
             food.setEmail(user.getEmail());
 
             Date date = new Date();
@@ -155,20 +199,4 @@ public class NewDetailActivity extends AppCompatActivity implements View.OnClick
 
     }
 
-
-    public static String getTimeDate(Map<String, String> timestamp){
-        try{
-            Date netDate = (new Date(String.valueOf(timestamp)));
-            SimpleDateFormat sfd = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault());
-            return sfd.format(netDate);
-        } catch(Exception e) {
-            return "date";
-        }
-    }
-    public String getDatafTimeStamp(long timestamp){
-        java.util.Date time=new java.util.Date(timestamp*1000);
-        SimpleDateFormat pre = new SimpleDateFormat("EEE MM dd HH:mm:ss zzz yyyy");
-        //Hear Define your returning date formate
-        return pre.format(time);
-    }
 }
