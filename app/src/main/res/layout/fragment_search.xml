@@ -34,7 +34,7 @@
         android:hint="Type food here!" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvFoods"
+        android:id="@+id/rvCustomFoods"
         android:layout_width="match_parent"
         android:layout_height="430dp"
         android:layout_below="@+id/btnSearchAPI"

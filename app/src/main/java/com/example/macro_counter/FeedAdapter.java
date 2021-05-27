@@ -60,12 +60,12 @@ public class FeedAdapter extends FirebaseRecyclerAdapter<FeedModel, FeedAdapter.
         holder.itemName.setText(model.getItemName());
         holder.proteins.setText(model.getProteinCnt());
 
-        holder.timePosted.setText(model.getTimeStamp());
+//        holder.timePosted.setText(model.getTimeStamp());
 
 //        // Parsing and Outputting TimeStamp
-//        SimpleDateFormat formattedDate = new SimpleDateFormat("MMMM dd, Y");
-//        String timeStamp = formattedDate.format(model.getTimeInMillis());
-//        holder.timePosted.setText(timeStamp);
+        SimpleDateFormat formattedDate = new SimpleDateFormat("MMMM dd, Y");
+        String timeStamp = formattedDate.format(model.getTimeInMillis());
+        holder.timePosted.setText(timeStamp);
 
     }
 

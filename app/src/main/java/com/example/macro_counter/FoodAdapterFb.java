@@ -2,6 +2,7 @@ package com.example.macro_counter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import org.jetbrains.annotations.NotNull;
 import org.parceler.Parcels;
 
+import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +38,15 @@ public class FoodAdapterFb extends FirebaseRecyclerAdapter<Food, FoodAdapterFb.F
         holder.tvAdapterFoodName.setText(model.getItemName());
         holder.tvAdapterCaloriesValue.setText(model.getCalories());
 
+//        holder.btnAdapterAdd.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i = new Intent(context, SearchDetailActivity.class);
+////                i.putExtra("food", Parcels.wrap(food));
+//                context.startActivity(i);
+//            }
+//        });
+
     }
 
 
@@ -44,9 +55,7 @@ public class FoodAdapterFb extends FirebaseRecyclerAdapter<Food, FoodAdapterFb.F
     @NonNull
     @Override
     public FoodsViewholder
-    onCreateViewHolder(@NonNull ViewGroup parent,
-                       int viewType)
-    {
+    onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.food_entry, parent, false);
         return new FoodAdapterFb.FoodsViewholder(view);
     }
@@ -56,16 +65,21 @@ public class FoodAdapterFb extends FirebaseRecyclerAdapter<Food, FoodAdapterFb.F
     class FoodsViewholder extends RecyclerView.ViewHolder {
         TextView tvAdapterFoodName, tvAdapterCalories, tvAdapterCaloriesValue;
         Button btnAdapterAdd;
-        RelativeLayout RLcontainer;
+        RelativeLayout container;
 
         public FoodsViewholder(@NonNull View itemView) {
             super(itemView);
 
             tvAdapterFoodName = itemView.findViewById(R.id.tvAdapterFoodName);
-//            tvAdapterCalories = itemView.findViewById(R.id.tvAdapterCalories);
             tvAdapterCaloriesValue = itemView.findViewById(R.id.tvAdapterCaloriesValue);
+
+
             btnAdapterAdd = itemView.findViewById(R.id.btnAdapterAdd);
-            RLcontainer = itemView.findViewById(R.id.container);
+            container =  itemView.findViewById(R.id.container);
+
+
+
+
         }
 
 

@@ -101,36 +101,7 @@ public class HomeFragment extends Fragment {
 
             }
         });
-
-        // Firebase Data Source || No List Array needed
-
-//        FirebaseRecyclerOptions<FeedModel> options =
-//                new FirebaseRecyclerOptions.Builder<FeedModel>()
-//                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Foods"), FeedModel.class)
-//                        .build();
-
-
-//        adapter = new FeedAdapter(options);
-//        rvFeed.setAdapter(adapter);
-
-
-
     }
-
-
-
-
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        adapter.startListening();
-//    }
-//
-//    @Override
-//    public void onStop() {
-//        super.onStop();
-//        adapter.stopListening();
-//    }
 
 
 }
