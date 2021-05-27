@@ -1,5 +1,6 @@
 package com.example.macro_counter.fragments;
 
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,6 +34,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 
 
@@ -40,11 +43,12 @@ public class ProfileFragment extends Fragment {
 
     public static final String TAG = "ProfileFragment";
     private RecyclerView rvFeed;
+    private DatabaseReference database;
     private DatabaseReference mDatabase;
     private DatabaseReference foodDatabaseRef;
 
-    FeedAdapter adapter;
-//    FeedAdapter_2 adapter;
+//    FeedAdapter adapter;
+        FeedAdapter_2 adapter;
 //    ProfileFeedAdapter adapter;
     ArrayList<FeedModel> list;
 
@@ -53,6 +57,7 @@ public class ProfileFragment extends Fragment {
     User currUser;
     private DatabaseReference databaseRef;
     String email;
+    String name;
 
     Date currDate = new Date();
     SimpleDateFormat formattedDate = new SimpleDateFormat("MMMM dd, Y");
@@ -93,34 +98,34 @@ public class ProfileFragment extends Fragment {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         userEmail = user.getEmail();
         uid = user.getUid();
+        name = user.getDisplayName();
+        Log.d(TAG, "PRINTING DISPLAY NAME: " + name);
 
-        String searchKey1=userEmail;
-        String searchKey2=timeStamp;
+        String searchKey1 = userEmail;
+        String searchKey2 = timeStamp;
 
         databaseRef = FirebaseDatabase.getInstance().getReference("Foods");
         databaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                    Log.i(TAG, "Looking at child!");
-                    if(dataSnapshot1.child("email").exists()&&dataSnapshot1.child("timeStamp").exists()) {
-                        if(dataSnapshot1.child("email").getValue().toString().equals(searchKey1)&&dataSnapshot1.child("timeStamp").getValue().toString().equals(searchKey2)) {
+//                    Log.i(TAG, "Looking at child!");
+                    if (dataSnapshot1.child("email").exists() && dataSnapshot1.child("timeStamp").exists()) {
+                        if (dataSnapshot1.child("email").getValue().toString().equals(searchKey1) && dataSnapshot1.child("timeStamp").getValue().toString().equals(searchKey2)) {
                             //Do What You Want To Do.
-                            Log.i(TAG, "Match!");
+//                            Log.i(TAG, "Match!");
                             dataSnapshot1.child("calories").getValue().toString();
                             cValue[0] += Integer.parseInt(String.valueOf(dataSnapshot1.child("calories").getValue()));
-                            Log.i(TAG, "Current Total Food Calories: " + cValue[0]);
+//                            Log.i(TAG, "Current Total Food Calories: " + cValue[0]);
+                        } else {
+//                            Log.i(TAG, "No Match!");
                         }
-                        else {
-                            Log.i(TAG, "No Match!");
-                        }
-                    }
-                    else {
-                        Log.i(TAG, "children do not exist");
+                    } else {
+//                        Log.i(TAG, "children do not exist");
                     }
                 }
 
-                Log.i(TAG, "Calorie Before setText: " + cValue[0]);
+//                Log.i(TAG, "Calorie Before setText: " + cValue[0]);
                 tvDailyCalories.setText(String.valueOf(cValue[0]));
             }
 
@@ -163,29 +168,43 @@ public class ProfileFragment extends Fragment {
         // Recycler View Section
 
         rvFeed = (RecyclerView) view.findViewById(R.id.rvFeed);
+        database = FirebaseDatabase.getInstance().getReference("Foods");
+        rvFeed.setHasFixedSize(true);
         rvFeed.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        list = new ArrayList<>();
 
-        FirebaseRecyclerOptions<FeedModel> options =
-                new FirebaseRecyclerOptions.Builder<FeedModel>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Foods").orderByChild("email").equalTo(userEmail), FeedModel.class)
-                        .build();
-
-
-        adapter = new FeedAdapter(options);
+        adapter = new FeedAdapter_2(getContext(), list);
         rvFeed.setAdapter(adapter);
 
-    }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        adapter.startListening();
-    }
+        database.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    FeedModel feedModel = dataSnapshot.getValue(FeedModel.class);
+                    String email = feedModel.getEmail();
+                    if (userEmail.equals(email)) {
+                        list.add(feedModel);
+                    }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        adapter.stopListening();
+
+                    // Sorting before displaying rows on feed post
+                    Collections.sort(list, new Comparator<FeedModel>() {
+                        @Override
+                        public int compare(FeedModel o1, FeedModel o2) {
+                            return Integer.valueOf((int) o2.getTimeInMillis()).compareTo((int) o1.getTimeInMillis());
+                        }
+                    });
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
     }
 }

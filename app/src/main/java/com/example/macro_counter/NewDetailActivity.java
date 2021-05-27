@@ -129,12 +129,9 @@ public class NewDetailActivity extends AppCompatActivity implements View.OnClick
             food.setUsername(name);
             food.setEmail(user.getEmail());
 
-
-            // Sets timestamp as a String
-            Date currDate = new Date();
-            SimpleDateFormat formattedDate = new SimpleDateFormat("MMMM dd, Y");
-            String timeStamp = formattedDate.format(currDate);
-            food.setTimeStamp(timeStamp);
+            Date date = new Date();
+            long timeStamp = date.getTime();
+            food.setTimeInMillis(timeStamp);
 
             FirebaseDatabase.getInstance().getReference("Foods")
                     .child(foodKey)
