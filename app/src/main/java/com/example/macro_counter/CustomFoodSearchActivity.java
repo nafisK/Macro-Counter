@@ -2,45 +2,26 @@ package com.example.macro_counter;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
-import android.view.MenuItem;
-import android.view.inputmethod.EditorInfo;
-import android.widget.EditText;
-
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.EditText;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.macro_counter.fragments.HomeFragment;
-import com.example.macro_counter.fragments.ProfileFragment;
-import com.example.macro_counter.fragments.SearchFragment;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class CustomFoodSearchActivity extends AppCompatActivity implements OnClickListener{
 
-    public static final String TAG = "CustomFoodSearchActivity";
+    public static final String TAG = "CustomFoodSearchActivit";
     private RecyclerView recyclerView;
     FoodAdapterFb adapter;
     FoodAdapterFb adapter1;

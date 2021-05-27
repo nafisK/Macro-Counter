@@ -16,16 +16,16 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="18dp"
-        android:layout_marginEnd="43dp"
+        android:layout_marginEnd="20dp"
         android:text="Search" />
 
     <EditText
         android:id="@+id/fb_edit_text"
-        android:layout_width="255dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="19dp"
         android:hint="Type food here!" />
 
@@ -56,7 +56,8 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
         android:layout_marginBottom="38dp"
         android:layout_weight="1"
         android:text="New Food" />

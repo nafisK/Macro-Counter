@@ -16,6 +16,8 @@
         android:layout_marginTop="10dp"
         android:ellipsize="end"
         android:maxLines="1"
+        android:textColor="@color/kelly_green"
+        android:textStyle="bold"
         tools:text="Food Name" />
 
 
@@ -27,6 +29,7 @@
         android:layout_marginStart="45dp"
         android:layout_marginTop="10dp"
         android:layout_toEndOf="@+id/tvFoodName"
+        android:textColor="@color/teal_blue"
         tools:text="200" />
 
     <Button
@@ -37,6 +40,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="2dp"
         android:layout_marginEnd="20dp"
+        android:backgroundTint="@color/teal_blue"
         android:maxLines="1"
         android:text="Add"
         android:textSize="12sp" />

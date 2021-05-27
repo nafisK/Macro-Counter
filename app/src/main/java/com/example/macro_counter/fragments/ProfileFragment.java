@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,9 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.macro_counter.FeedAdapter;
-import com.example.macro_counter.FeedAdapter_2;
 import com.example.macro_counter.FeedModel;
-import com.example.macro_counter.ProfileFeedAdapter;
 import com.example.macro_counter.R;
 import com.example.macro_counter.User;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -29,10 +26,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 
@@ -172,7 +167,7 @@ public class ProfileFragment extends Fragment {
                         .build();
 
 
-        adapter = new FeedAdapter(options);
+        adapter = new FeedAdapter(getContext(), options);
         rvFeed.setAdapter(adapter);
 
     }
