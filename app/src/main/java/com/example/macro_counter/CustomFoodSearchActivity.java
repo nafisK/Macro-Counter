@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import android.util.Log;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 
 import android.view.View;
@@ -23,7 +24,7 @@ import com.google.firebase.database.Query;
 
 public class CustomFoodSearchActivity extends AppCompatActivity implements OnClickListener{
 
-    public static final String TAG = "CustomFoodSearchActivity";
+    public static final String TAG = "CustomFoodSearchActivit";
     private RecyclerView recyclerView;
     FoodAdapterFb adapter;
     FoodAdapterFb adapter1;
@@ -81,6 +82,8 @@ public class CustomFoodSearchActivity extends AppCompatActivity implements OnCli
 
                         adapter.stopListening();
                         adapter1.startListening();
+
+                        editText.onEditorAction(EditorInfo.IME_ACTION_DONE);
 
                     }});
 

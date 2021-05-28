@@ -31,6 +31,7 @@
         android:layout_marginStart="12dp"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="15dp"
+        android:imeOptions="actionDone"
         android:hint="Type food here!" />
 
     <androidx.recyclerview.widget.RecyclerView
