@@ -9,32 +9,17 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
-import android.widget.SearchView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import com.example.macro_counter.CustomFoodSearchActivity;
-import com.android.volley.RequestQueue;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.Volley;
 import com.codepath.asynchttpclient.AsyncHttpClient;
-import com.codepath.asynchttpclient.RequestParams;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
@@ -42,12 +27,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import com.example.macro_counter.Food;
 import com.example.macro_counter.FoodAdapter;
-import com.example.macro_counter.MainActivity;
-import com.example.macro_counter.NewDetailActivity;
 import com.example.macro_counter.R;
-import com.parse.ParseQuery;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,7 +64,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
         super.onViewCreated(view, savedInstanceState);
         // Setup any handles to view objects here
         // EditText etFoo = (EditText) view.findViewById(R.id.etFoo);
-        rvFoods = view.findViewById(R.id.rvFoods);
+        rvFoods = view.findViewById(R.id.rvCustomFoods);
 
         EditText editText = view.findViewById(R.id.edit_text);
         btSearchAPI = view.findViewById(R.id.btnSearchAPI);
@@ -91,11 +72,6 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
         foodList = new ArrayList<>();
         foodAdapter = new FoodAdapter(getContext(), foodList);
 
-        //Steps to use the recycler view:
-        //O. create layout for one row in the list
-        //1. create the adapter
-        //2. create the data source
-        //3. set the adapter on the recycler view
         rvFoods.setAdapter(foodAdapter);
 
         //4. set the layout manager on the recycler view
@@ -131,11 +107,11 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                 JSONObject jsonObject = json.jsonObject;
                 try {
                     JSONArray hints = jsonObject.getJSONArray("hints");
-                    Log.i(TAG, "Hints: " + hints.toString());
+//                    Log.i(TAG, "Hints: " + hints.toString());
                     foodList.clear();
                     foodList.addAll(Food.fromJsonArray(hints));
                     foodAdapter.notifyDataSetChanged();
-                    Log.i(TAG, "Foods:" + foodList.size());
+//                    Log.i(TAG, "Foods:" + foodList.size());
                 } catch (JSONException e) {
                     Log.e(TAG, "Hit json exception");
                     e.printStackTrace();
@@ -145,7 +121,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onFailure(int statusCode, Headers headers, String s, Throwable throwable) {
                 Log.d(TAG, "onFailure");
-                Toast.makeText(getContext(), "Type something!", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "Type something!", Toast.LENGTH_SHORT).show();
             }
         });
     }

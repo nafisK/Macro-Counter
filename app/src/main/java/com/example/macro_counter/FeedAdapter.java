@@ -65,7 +65,7 @@ public class FeedAdapter extends FirebaseRecyclerAdapter<FeedModel, FeedAdapter.
         holder.itemName.setText(model.getItemName());
         holder.proteins.setText(model.getProteinCnt());
 
-        holder.timePosted.setText(model.getTimeStamp());
+//        holder.timePosted.setText(model.getTimeStamp());
 
         if(position % 2 == 1) {
             holder.lyt_content_view.setBackgroundColor(Color.WHITE);
@@ -74,9 +74,9 @@ public class FeedAdapter extends FirebaseRecyclerAdapter<FeedModel, FeedAdapter.
         }
 
 //        // Parsing and Outputting TimeStamp
-//        SimpleDateFormat formattedDate = new SimpleDateFormat("MMMM dd, Y");
-//        String timeStamp = formattedDate.format(model.getTimeInMillis());
-//        holder.timePosted.setText(timeStamp);
+        SimpleDateFormat formattedDate = new SimpleDateFormat("MMMM dd, Y");
+        String timeStamp = formattedDate.format(model.getTimeInMillis());
+        holder.timePosted.setText(timeStamp);
 
     }
 
