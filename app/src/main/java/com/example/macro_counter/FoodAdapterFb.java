@@ -81,6 +81,30 @@ public class FoodAdapterFb extends FirebaseRecyclerAdapter<Food, FoodAdapterFb.F
                     if (position != RecyclerView.NO_POSITION && listener != null) {
                         listener.OnItemClick(getSnapshots().getSnapshot(position), position);
 
+//                        Food foods = getSnapshots().getSnapshot(position).getValue(Food.class);
+//                        Log.d(TAG,"snap item: " + foods.getItemName());
+//                        Intent i = new Intent(context, SearchDetailActivity.class);
+//                        i.putExtra("food", Parcels.wrap(foods));
+//                        context.startActivity(i);
+
+                    }
+
+                }
+            });
+
+            btnAdapterAdd.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION && listener != null) {
+                        listener.OnItemClick(getSnapshots().getSnapshot(position), position);
+
+//                        Food foods = getSnapshots().getSnapshot(position).getValue(Food.class);
+//                        Log.d(TAG,"snap item: " + foods.getItemName());
+//                        Intent i = new Intent(context, SearchAddButtonActivity.class);
+//                        i.putExtra("food", Parcels.wrap(foods));
+//                        context.startActivity(i);
                     }
 
                 }

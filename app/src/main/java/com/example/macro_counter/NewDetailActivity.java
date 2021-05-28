@@ -150,10 +150,6 @@ public class NewDetailActivity extends AppCompatActivity implements View.OnClick
             });
 
 
-
-
-
-
         }
         else {
             // No user is signed in

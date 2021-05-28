@@ -110,7 +110,7 @@ public class ProfileFragment extends Fragment {
                             dataSnapshot1.child("calories").getValue().toString();
                             cValue[0] += Integer.parseInt(String.valueOf(dataSnapshot1.child("calories").getValue()));
 
-                            Log.d(TAG, "email: " + userEmail + " cValue[0]: " + cValue[0]);
+//                            Log.d(TAG, "email: " + userEmail + " cValue[0]: " + cValue[0]);
                         } else {
                         }
                     } else {

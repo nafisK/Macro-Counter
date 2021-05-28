@@ -107,11 +107,11 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                 JSONObject jsonObject = json.jsonObject;
                 try {
                     JSONArray hints = jsonObject.getJSONArray("hints");
-                    Log.i(TAG, "Hints: " + hints.toString());
+//                    Log.i(TAG, "Hints: " + hints.toString());
                     foodList.clear();
                     foodList.addAll(Food.fromJsonArray(hints));
                     foodAdapter.notifyDataSetChanged();
-                    Log.i(TAG, "Foods:" + foodList.size());
+//                    Log.i(TAG, "Foods:" + foodList.size());
                 } catch (JSONException e) {
                     Log.e(TAG, "Hit json exception");
                     e.printStackTrace();
@@ -121,7 +121,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onFailure(int statusCode, Headers headers, String s, Throwable throwable) {
                 Log.d(TAG, "onFailure");
-                Toast.makeText(getContext(), "Type something!", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "Type something!", Toast.LENGTH_SHORT).show();
             }
         });
     }

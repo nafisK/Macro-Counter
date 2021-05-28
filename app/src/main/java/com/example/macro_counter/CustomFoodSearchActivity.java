@@ -84,11 +84,12 @@ public class CustomFoodSearchActivity extends AppCompatActivity implements OnCli
 //                snapshot.getRef();
 //                Log.d(TAG, "Snapshop Item Name: " + itemName);
 
-                Intent i = new Intent(CustomFoodSearchActivity.this, SearchDetailActivity.class);
+                Intent i = new Intent(CustomFoodSearchActivity.this, SearchAddButtonActivity.class);
                 i.putExtra("food", Parcels.wrap(foods));
                 (CustomFoodSearchActivity.this).startActivity(i);
             }
         });
+
         btnSearchFB.setOnClickListener(
                 new OnClickListener() {
                     @Override
@@ -99,7 +100,7 @@ public class CustomFoodSearchActivity extends AppCompatActivity implements OnCli
                         FirebaseRecyclerOptions<Food> options1 = new FirebaseRecyclerOptions.Builder<Food>()
                         .setQuery(FirebaseDatabase.getInstance().getReference().child("Foods").orderByChild("itemName").startAt(searchValue).endAt(searchValue + "\uf8ff"), Food.class)
                                 .build();
-                        Log.d(TAG, "onSuccess: " + options1);
+//                        Log.d(TAG, "onSuccess: " + options1);
 
 
                         adapter1 = new FoodAdapterFb(options1);
