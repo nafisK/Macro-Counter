@@ -10,7 +10,7 @@ public class FeedModel {
     String fiber;
     String itemName;
     String proteinCnt;
-//    String timeStamp;
+    String userDisplayName;
     long timeInMillis;
 
 
@@ -25,7 +25,6 @@ public class FeedModel {
         this.fiber = fiber;
         this.itemName = itemName;
         this.proteinCnt = proteinCnt;
-//        this.timeStamp = timeStamp;
     }
 
     public String getCalories() { return calories; }
@@ -33,7 +32,6 @@ public class FeedModel {
     public String getFat() { return fat; }
     public String getFiber() { return fiber; }
     public String getItemName() { return itemName; }
-//    public String getTimeStamp() { return timeStamp; }
     public String getProteinCnt() { return proteinCnt; }
     public String getCholesterol() { return cholesterol; }
     public void setEmail(String email) { this.email = email; }
@@ -43,21 +41,14 @@ public class FeedModel {
     public void setFiber(String fiber) { this.fiber = fiber; }
     public void setItemName(String itemName) { this.itemName = itemName; }
     public void setProteinCnt(String proteinCnt) { this.proteinCnt = proteinCnt; }
-//    public void setTimeStamp(String timeStamp) { this.timeStamp = timeStamp; }
     public long getTimeInMillis() { return timeInMillis; }
     public void setTimeInMillis(long timeInMillis) { this.timeInMillis = timeInMillis; }
 
-    @Override
-    public String toString() {
-        return "FeedModel{" +
-                "calories='" + calories + '\'' +
-                ", cholesterol='" + cholesterol + '\'' +
-                ", email='" + email + '\'' +
-                ", fat='" + fat + '\'' +
-                ", fiber='" + fiber + '\'' +
-                ", itemName='" + itemName + '\'' +
-                ", proteinCnt='" + proteinCnt + '\'' +
-                ", timeInMillis=" + timeInMillis +
-                '}';
+    public String getUserDisplayName() {
+        return userDisplayName;
+    }
+
+    public void setUserDisplayName(String userDisplayName) {
+        this.userDisplayName = userDisplayName;
     }
 }

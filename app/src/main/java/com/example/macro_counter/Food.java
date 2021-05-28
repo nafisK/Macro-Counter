@@ -9,9 +9,8 @@ import java.util.ArrayList;
 
 @Parcel
 public class Food {
-    public String itemName, calories, proteinCnt, fat, cholesterol, fiber, username, email;
+    public String itemName, calories, proteinCnt, fat, cholesterol, fiber, userDisplayName, email;
     public long timeInMillis;
-    public String timeStamp;
 
     // Default constructor required for calls to
 
@@ -102,10 +101,6 @@ public class Food {
         this.fiber = fiber;
     }
 
-    public void setUsername(String userame) { this.username = username; }
-
-    public String getUsername() { return username; }
-
     public String getEmail() { return email; }
 
     public void setEmail(String email) { this.email = email; }
@@ -114,14 +109,17 @@ public class Food {
 
     public long getTimeInMillis() { return timeInMillis; }
 
-    public void setTimeStamp(String timeStamp) { this.timeStamp = timeStamp; }
-
-    public String getTimeStamp() { return timeStamp; }
-
     public static double roundAvoid(double value, int places) {
         double scale = Math.pow(10, places);
         return Math.round(value * scale) / scale;
     }
 
+    public String getUserDisplayName() {
+        return userDisplayName;
+    }
+
+    public void setUserDisplayName(String userDisplayName) {
+        this.userDisplayName = userDisplayName;
+    }
 }
 

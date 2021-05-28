@@ -15,6 +15,7 @@ public class User {
     public String activity;
     public String calorieIntake;
 
+
     // Default constructor required for calls to
     // DataSnapshot.getValue(User.class)
     public User() {
@@ -154,5 +155,6 @@ public class User {
     public void setHeightCm(String heightCm) {
         this.heightCm = heightCm;
     }
+
 
 }
