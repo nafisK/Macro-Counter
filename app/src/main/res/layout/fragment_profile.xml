@@ -31,6 +31,7 @@
         android:layout_marginTop="25dp"
         android:layout_toEndOf="@+id/Name"
         android:text="Name"
+        android:textColor="@color/teal_blue"
         android:textSize="15sp" />
 
 
@@ -53,6 +54,7 @@
         android:layout_marginTop="10dp"
         android:layout_toEndOf="@+id/Weight"
         android:text="Weight"
+        android:textColor="@color/teal_blue"
         android:textSize="15sp" />
 
     <TextView
@@ -74,6 +76,7 @@
         android:layout_marginTop="10dp"
         android:layout_toEndOf="@+id/Age"
         android:text="Age"
+        android:textColor="@color/teal_blue"
         android:textSize="15sp" />
 
     <TextView
@@ -96,6 +99,7 @@
         android:layout_marginTop="10dp"
         android:layout_toEndOf="@+id/Calories"
         android:text="0000"
+        android:textColor="@color/teal_blue"
         android:textSize="15sp" />
 
     <TextView
@@ -119,6 +123,7 @@
         android:layout_marginTop="10dp"
         android:layout_toEndOf="@+id/outof"
         android:text="0000"
+        android:textColor="@color/teal_700"
         android:textSize="15sp" />
 
 
@@ -164,13 +169,24 @@
 <!--        android:text="yyy"-->
 <!--        android:textSize="15sp" />-->
 
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_above="@+id/rvFeed"
+        android:layout_marginBottom="1dp"
+        android:background="@color/tanager_turquoise_trans"
+        android:backgroundTint="@color/black" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvFeed"
         android:layout_width="395dp"
-        android:layout_height="453dp"
+        android:layout_height="430dp"
         android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true" />
-
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="14dp" />
 
 
 </RelativeLayout>

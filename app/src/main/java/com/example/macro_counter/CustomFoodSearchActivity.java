@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -31,7 +32,7 @@ import java.util.List;
 
 public class CustomFoodSearchActivity extends AppCompatActivity implements OnClickListener{
 
-    public String TAG = "CustomFoodSearchActivity";
+    public static final String TAG = "CustomFoodSearchActivit";
     private RecyclerView recyclerView;
     FoodAdapterFb adapter;
     FoodAdapterFb adapter1;

@@ -2,10 +2,12 @@ package com.example.macro_counter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -51,6 +53,11 @@ public class FeedAdapter_2 extends RecyclerView.Adapter<FeedAdapter_2.MyViewHold
         String timeStamp = formattedDate.format(model.getTimeInMillis());
         holder.timePosted.setText(timeStamp);
 
+        if(position % 2 == 1) {
+            holder.lyt_content_view.setBackgroundColor(Color.WHITE);
+        } else {
+            holder.lyt_content_view.setBackgroundColor(context.getResources().getColor(R.color.tanager_turquoise_trans));
+        }
 
 
     }
@@ -63,6 +70,7 @@ public class FeedAdapter_2 extends RecyclerView.Adapter<FeedAdapter_2.MyViewHold
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView userDisplayName, email, timePosted, itemName, calories, proteins, fiber, fat;
+        RelativeLayout lyt_content_view;
 
         public MyViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
@@ -75,6 +83,7 @@ public class FeedAdapter_2 extends RecyclerView.Adapter<FeedAdapter_2.MyViewHold
             proteins = itemView.findViewById(R.id.proteins);
             fiber = itemView.findViewById(R.id.fiber);
             fat = itemView.findViewById(R.id.fats);
+            lyt_content_view = itemView.findViewById(R.id.feedPostContainer);
 
         }
     }

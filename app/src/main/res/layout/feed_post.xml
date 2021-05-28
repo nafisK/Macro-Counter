@@ -4,7 +4,10 @@
     android:id="@+id/feedPostContainer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    android:layout_marginStart="5dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginEnd="5dp"
+    android:layout_marginBottom="0dp"
     android:orientation="vertical">
 
 
@@ -13,6 +16,7 @@
         android:layout_width="280dp"
         android:layout_height="30dp"
         android:text="Username"
+        android:textColor="@color/teal_blue"
         android:textStyle="bold"
         tools:text="Nafis Khan" />
 
@@ -21,6 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_alignParentRight="true"
+        android:textColor="@color/teal_blue"
         tools:text="March 9, 2020" />
 
     <TextView
@@ -30,7 +35,8 @@
         android:layout_below="@+id/username"
         android:layout_alignParentStart="true"
         android:layout_marginTop="0dp"
-        android:text="Food: " />
+        android:text="Food: "
+        android:textColor="@color/black" />
 
     <TextView
         android:id="@+id/itemName"
@@ -38,7 +44,8 @@
         android:layout_height="30dp"
         android:layout_below="@id/username"
         android:layout_toRightOf="@id/itemNameText"
-        android:text="Apple" />
+        android:text="Apple"
+        android:textColor="@color/teal_blue" />
 
 
     <TextView
@@ -47,7 +54,8 @@
         android:layout_height="30dp"
         android:layout_below="@id/timePosted"
         android:layout_alignParentRight="true"
-        android:text="2000" />
+        android:text="2000"
+        android:textColor="@color/kelly_green" />
 
 
     <TextView
@@ -58,7 +66,8 @@
         android:layout_marginTop="0dp"
         android:layout_toLeftOf="@id/calories"
         android:height="30dp"
-        android:text="Calories: " />
+        android:text="Calories: "
+        android:textColor="@color/black" />
 
 
     <TextView
@@ -68,6 +77,7 @@
         android:layout_below="@+id/itemName"
         android:layout_alignParentStart="true"
         android:layout_marginTop="0dp"
+        android:textColor="@color/black"
         tools:text="Proteins: " />
 
     <TextView
@@ -77,7 +87,8 @@
         android:layout_below="@id/itemName"
         android:layout_marginTop="0dp"
         android:layout_toRightOf="@id/proteinsText"
-        android:text="200" />
+        android:text="200"
+        android:textColor="@color/kelly_green" />
 
     <TextView
         android:id="@+id/fiberText"
@@ -87,7 +98,8 @@
         android:layout_marginLeft="50dp"
         android:layout_marginTop="0dp"
         android:layout_toRightOf="@id/proteins"
-        android:text="Fiber: " />
+        android:text="Fiber: "
+        android:textColor="@color/black" />
 
     <TextView
         android:id="@+id/fiber"
@@ -96,7 +108,8 @@
         android:layout_below="@+id/itemName"
         android:layout_marginTop="0dp"
         android:layout_toRightOf="@id/fiberText"
-        android:text="500" />
+        android:text="500"
+        android:textColor="@color/kelly_green" />
 
 
     <TextView
@@ -107,7 +120,8 @@
         android:layout_marginLeft="50dp"
         android:layout_marginTop="0dp"
         android:layout_toRightOf="@id/fiber"
-        android:text="Fats: " />
+        android:text="Fats: "
+        android:textColor="@color/black" />
 
     <TextView
         android:id="@+id/fats"
@@ -116,12 +130,13 @@
         android:layout_below="@+id/itemName"
         android:layout_marginTop="0dp"
         android:layout_toRightOf="@id/fatsText"
-        android:text="200" />
+        android:text="200"
+        android:textColor="@color/kelly_green" />
 
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="5dp"
         android:layout_below="@+id/proteins"
         android:background="?android:attr/listDivider" />
 

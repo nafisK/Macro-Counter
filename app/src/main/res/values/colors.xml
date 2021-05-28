@@ -7,4 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="kelly_green">#6cb891</color>
+    <color name="tanager_turquoise">#B1E3EA</color>
+    <color name="tanager_turquoise_trans">#80B1E3EA</color>
+    <color name="teal_blue">#4da4a4</color>
 </resources>
