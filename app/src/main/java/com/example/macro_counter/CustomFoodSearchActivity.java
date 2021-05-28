@@ -1,5 +1,6 @@
 package com.example.macro_counter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -18,13 +19,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
+import org.parceler.Parcels;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class CustomFoodSearchActivity extends AppCompatActivity implements OnClickListener{
 
-    public static final String TAG = "CustomFoodSearchActivit";
+    public String TAG = "CustomFoodSearchActivity";
     private RecyclerView recyclerView;
     FoodAdapterFb adapter;
     FoodAdapterFb adapter1;
@@ -35,11 +42,14 @@ public class CustomFoodSearchActivity extends AppCompatActivity implements OnCli
     private BottomNavigationView bottomNavigationView;
     private Query databaseRef;
     private Query foodQuery;
+    List<Food> foodList;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_food_search);
+        foodList = new ArrayList<>();
 
         btnSearchFB = findViewById(R.id.btnSearchFB);
         EditText editText = findViewById(R.id.fb_edit_text);
@@ -64,6 +74,22 @@ public class CustomFoodSearchActivity extends AppCompatActivity implements OnCli
         // Connecting Adapter class with the Recycler view
         recyclerView.setAdapter(adapter);
 
+        adapter.setOnItemClickListener(new FoodAdapterFb.OnItemClickListener() {
+            @Override
+            public void OnItemClick(DataSnapshot snapshot, int position) {
+
+                // Get Object and use the values to update the UI
+                Food foods = snapshot.getValue(Food.class);
+                String itemName = foods.getItemName();
+//                snapshot.getRef();
+//                Log.d(TAG, "Snapshop Item Name: " + itemName);
+
+                Intent i = new Intent(CustomFoodSearchActivity.this, SearchAddButtonActivity.class);
+                i.putExtra("food", Parcels.wrap(foods));
+                (CustomFoodSearchActivity.this).startActivity(i);
+            }
+        });
+
         btnSearchFB.setOnClickListener(
                 new OnClickListener() {
                     @Override
@@ -74,7 +100,9 @@ public class CustomFoodSearchActivity extends AppCompatActivity implements OnCli
                         FirebaseRecyclerOptions<Food> options1 = new FirebaseRecyclerOptions.Builder<Food>()
                         .setQuery(FirebaseDatabase.getInstance().getReference().child("Foods").orderByChild("itemName").startAt(searchValue).endAt(searchValue + "\uf8ff"), Food.class)
                                 .build();
-                        Log.d(TAG, "onSuccess");
+//                        Log.d(TAG, "onSuccess: " + options1);
+
+
                         adapter1 = new FoodAdapterFb(options1);
 
                         // Connecting Adapter class with the Recycler view
