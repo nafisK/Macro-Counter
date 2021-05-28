@@ -57,7 +57,6 @@ public class ProfileFragment extends Fragment {
     User currUser;
     private DatabaseReference databaseRef;
     String email;
-    String name;
 
     Date currDate = new Date();
     SimpleDateFormat formattedDate = new SimpleDateFormat("MMMM dd, Y");
@@ -107,23 +106,16 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-//                    Log.i(TAG, "Looking at child!");
                     if (dataSnapshot1.child("email").exists() && dataSnapshot1.child("timeStamp").exists()) {
                         if (dataSnapshot1.child("email").getValue().toString().equals(searchKey1) && dataSnapshot1.child("timeStamp").getValue().toString().equals(searchKey2)) {
-                            //Do What You Want To Do.
-//                            Log.i(TAG, "Match!");
+
                             dataSnapshot1.child("calories").getValue().toString();
                             cValue[0] += Integer.parseInt(String.valueOf(dataSnapshot1.child("calories").getValue()));
-//                            Log.i(TAG, "Current Total Food Calories: " + cValue[0]);
                         } else {
-//                            Log.i(TAG, "No Match!");
                         }
                     } else {
-//                        Log.i(TAG, "children do not exist");
                     }
                 }
-
-//                Log.i(TAG, "Calorie Before setText: " + cValue[0]);
                 tvDailyCalories.setText(String.valueOf(cValue[0]));
             }
 
@@ -143,7 +135,7 @@ public class ProfileFragment extends Fragment {
                 User userProfile = dataSnapshot.getValue(User.class);
 
                 tvName.setText(userProfile.getName());
-                name = userProfile.getName();
+//                email = userProfile.getEmail();
                 tvWeight.setText(userProfile.getWeight());
                 tvAge.setText(userProfile.getAge());
 //                // add daily caloric intake
@@ -175,6 +167,7 @@ public class ProfileFragment extends Fragment {
         database = FirebaseDatabase.getInstance().getReference("Foods");
         rvFeed.setHasFixedSize(true);
         rvFeed.setLayoutManager(new LinearLayoutManager(getContext()));
+        email = user.getEmail();
 
         list = new ArrayList<>();
 
@@ -187,12 +180,13 @@ public class ProfileFragment extends Fragment {
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     FeedModel feedModel = dataSnapshot.getValue(FeedModel.class);
-                    String email = feedModel.getEmail();
-                    if (userEmail.equals(email)) {
-                        feedModel.setEmail(name);
+                    String emailFromFood = feedModel.getEmail();
+                    System.out.println("PRINTING EMAIL: " + email);
+                    System.out.println("PRINTING EMAIL2: " + emailFromFood);
+                    if (email.equals(emailFromFood)) {
+//                        feedModel.setUserDisplayName(name);
                         list.add(feedModel);
                     }
-
 
                     // Sorting before displaying rows on feed post
                     Collections.sort(list, new Comparator<FeedModel>() {

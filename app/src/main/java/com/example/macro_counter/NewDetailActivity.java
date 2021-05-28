@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -42,9 +43,14 @@ public class NewDetailActivity extends AppCompatActivity implements View.OnClick
     private Button btnCancel, btnApply;
 
     private DatabaseReference mDatabase;
+    FirebaseUser user;
     private DatabaseReference db;
     private FirebaseAuth mAuth;
+    Food food;
+    String uid;
     String userName;
+    String foodKey;
+
 
 
 
@@ -123,80 +129,97 @@ public class NewDetailActivity extends AppCompatActivity implements View.OnClick
             return;
         }
 
-        Food food = new Food(itemName, calories, proteinCnt, fat, cholesterol, fiber);
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        food = new Food(itemName, calories, proteinCnt, fat, cholesterol, fiber);
+        user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         String foodPostKey = database.getReference("FoodPost").push().getKey();
-        String foodKey = database.getReference("Foods").push().getKey();
+        foodKey = database.getReference("Foods").push().getKey();
 
-
-
-        // DOES GET EMAIL PROPERLY
-        String email = user.getEmail();
 
         if (user != null) {
 
-            // Goes through users to match the email of foods to email of users
-            db = FirebaseDatabase.getInstance().getReference("Users");
-            db.addValueEventListener(new ValueEventListener() {
+//             Goes through users to match the email of foods to email of users
+            readUserName(new FirebaseCallback() {
                 @Override
-                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                        User users = dataSnapshot.getValue(User.class);
-                        if (email.equals(users.getEmail())) {
+                public void onCallBack(String Uname) {
+                    userName = Uname;
+                    writeFoodData();
 
-
-                            // trying to make the userName get the name but it returns a null for some reason
-                            // @Justin take a look here
-//                            userName = users.getName();
-//                            x[0] = userName;
-//                            System.out.println("PRINTING FOOD USER NAME: " + userName);
-//
-
-
-
-                            
-                        }
-
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
                 }
             });
 
 
-            food.setUsername(userName);
-//            System.out.println("PRINTING USER NAME:" + userName);
-//            System.out.println("PRINTING USER NAME:" + food.getUsername());
-            food.setEmail(user.getEmail());
 
-            Date date = new Date();
-            long timeStamp = date.getTime();
-            food.setTimeInMillis(timeStamp);
 
-            FirebaseDatabase.getInstance().getReference("Foods")
-                    .child(foodKey)
-                    .setValue(food).addOnCompleteListener(new OnCompleteListener<Void>()
-            {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if(task.isSuccessful()){
-                        Toast.makeText(NewDetailActivity.this, "Food has been registered Successfully!", Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(NewDetailActivity.this, MainActivity.class));
-                    } else {
-                        Toast.makeText(NewDetailActivity.this, "Failed to register! Try Again!", Toast.LENGTH_LONG).show();
-                    }
-                }
-            });
-        } else {
+
+
+        }
+        else {
             // No user is signed in
             Toast.makeText(NewDetailActivity.this, "Not Signed in! Please sign in!", Toast.LENGTH_LONG).show();
             startActivity(new Intent(NewDetailActivity.this, LoginActivity.class));
         }
 
     }
+
+    private void writeFoodData() {
+//        food.setUsername(userName);
+        food.setEmail(user.getEmail());
+
+        Date date = new Date();
+        long timeStamp = date.getTime();
+        food.setTimeInMillis(timeStamp);
+        food.setUserDisplayName(userName);
+        System.out.println("PRINTING USER NAME 1: " + userName);
+        System.out.println("PRINTING FROM FOOD OBJ: " + food.getUserDisplayName());
+
+
+
+        FirebaseDatabase.getInstance().getReference("Foods")
+                .child(foodKey)
+                .setValue(food).addOnCompleteListener(new OnCompleteListener<Void>()
+        {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    Toast.makeText(NewDetailActivity.this, "Food has been registered Successfully!", Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(NewDetailActivity.this, MainActivity.class));
+                } else {
+                    Toast.makeText(NewDetailActivity.this, "Failed to register! Try Again!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
+    private void readUserName(FirebaseCallback firebaseCallback) {
+        uid = user.getUid();
+//        System.out.println("Printing User ID: " + uid);
+        db = FirebaseDatabase.getInstance().getReference("Users").child(uid);
+        ValueEventListener userListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                // Get Post object and use the values to update the UI
+                User userProfile = dataSnapshot.getValue(User.class);
+                userName = userProfile.getName();
+
+                firebaseCallback.onCallBack(userName);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+            }
+        };
+        db.addValueEventListener(userListener);
+    }
+
+    private interface FirebaseCallback {
+        void onCallBack(String Uname);
+    }
+
+
 
 }

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,8 +16,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.parceler.Parcels;
 
@@ -34,7 +38,12 @@ public class SearchAddButtonActivity extends AppCompatActivity implements View.O
 
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
+    private FirebaseUser user;
+    private DatabaseReference db;
+    String uid;
+    String userName;
     Food food;
+    String foodKey;
 
 //    private Map mapTimeStamp = new HashMap();
 //    private Map mapUser = new HashMap();
@@ -96,36 +105,31 @@ public class SearchAddButtonActivity extends AppCompatActivity implements View.O
         String itemId = mDatabase.push().getKey();
 
         Food foodDB = new Food(itemName, calories, proteinCnt, fat, cholesterol, fiber);
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         String foodPostKey = database.getReference("FoodPost").push().getKey();
-        String foodKey = database.getReference("Foods").push().getKey();
+        foodKey = database.getReference("Foods").push().getKey();
 
         if (user != null) {
-            // User is signed in
-            String name = user.getDisplayName();
-            food.setUsername(name);
-            food.setEmail(user.getEmail());
 
-            Date currDate = new Date();
-            SimpleDateFormat formattedDate = new SimpleDateFormat("MMMM dd, Y");
-            String timeStamp = formattedDate.format(currDate);
-            food.setTimeStamp(timeStamp);
 
-            FirebaseDatabase.getInstance().getReference("Foods")
-                    .child(foodKey)
-                    .setValue(food).addOnCompleteListener(new OnCompleteListener<Void>()
-            {
+            readUserName(new FirebaseCallback() {
                 @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if(task.isSuccessful()){
-                        Toast.makeText(SearchAddButtonActivity.this, "Food has been registered Successfully!", Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(SearchAddButtonActivity.this, MainActivity.class));
-                    } else {
-                        Toast.makeText(SearchAddButtonActivity.this, "Failed to register! Try Again!", Toast.LENGTH_LONG).show();
-                    }
+                public void onCallBack(String Uname) {
+                    userName = Uname;
+                    writeFoodData();
+
+
                 }
             });
+
+
+
+
+
+
+
+
         } else {
             // No user is signed in
             Toast.makeText(SearchAddButtonActivity.this, "Not Signed in! Please sign in!", Toast.LENGTH_LONG).show();
@@ -133,4 +137,74 @@ public class SearchAddButtonActivity extends AppCompatActivity implements View.O
         }
 
     }
+
+
+
+
+
+
+
+    private void writeFoodData() {
+
+        food.setEmail(user.getEmail());
+
+        Date date = new Date();
+        long timeStamp = date.getTime();
+        food.setTimeInMillis(timeStamp);
+
+        food.setUserDisplayName(userName);
+        System.out.println("PRINTING USER NAME 1: " + userName);
+        System.out.println("PRINTING FROM FOOD OBJ: " + food.getUserDisplayName());
+
+
+
+        FirebaseDatabase.getInstance().getReference("Foods")
+                .child(foodKey)
+                .setValue(food).addOnCompleteListener(new OnCompleteListener<Void>()
+        {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    Toast.makeText(SearchAddButtonActivity.this, "Food has been registered Successfully!", Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(SearchAddButtonActivity.this, MainActivity.class));
+                } else {
+                    Toast.makeText(SearchAddButtonActivity.this, "Failed to register! Try Again!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+
+
+
+    }
+
+    private void readUserName(FirebaseCallback firebaseCallback) {
+        uid = user.getUid();
+        System.out.println("Printing User ID: " + uid);
+        db = FirebaseDatabase.getInstance().getReference("Users").child(uid);
+        ValueEventListener userListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                // Get Post object and use the values to update the UI
+                User userProfile = dataSnapshot.getValue(User.class);
+                userName = userProfile.getName();
+
+                firebaseCallback.onCallBack(userName);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+            }
+        };
+        db.addValueEventListener(userListener);
+    }
+
+    private interface FirebaseCallback {
+        void onCallBack(String Uname);
+    }
+
+
 }
