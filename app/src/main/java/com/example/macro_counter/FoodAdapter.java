@@ -3,6 +3,7 @@ package com.example.macro_counter;
 import android.content.Context;
 import android.content.Intent;
 import android.text.Layout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,7 @@ import java.util.List;
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder> {
     private Context context;
     private List<Food> foods;
+    private String TAG = "FoodAdapter";
 
     public FoodAdapter(Context context, List<Food> foods){
         this.context = context;
@@ -46,6 +48,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         Food food = foods.get(position);
         holder.bind(food);
 
+        Log.d(TAG, "Food model: " + holder.toString());
     }
 
     @Override

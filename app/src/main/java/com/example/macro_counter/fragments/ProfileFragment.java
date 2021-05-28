@@ -131,7 +131,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                // Get Post object and use the values to update the UI
+                // Get Object and use the values to update the UI
                 User userProfile = dataSnapshot.getValue(User.class);
 
                 tvName.setText(userProfile.getName());
