@@ -32,6 +32,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
@@ -58,12 +59,10 @@ public class ProfileFragment extends Fragment {
     private DatabaseReference databaseRef;
     String email;
 
-    Date currDate = new Date();
-    SimpleDateFormat formattedDate = new SimpleDateFormat("MMMM dd, Y");
-    String timeStamp = formattedDate.format(currDate);
 
-//    String searchKey="justinparkcs@gmail.com|May 07, 2021";
-//    String[] str=searchKey.split("\\|");
+    Date date = new Date();
+    long timeInMillis = date.getTime();
+    SimpleDateFormat df = new SimpleDateFormat("MMMM dd, Y");
 
 
     final int[] cValue = {0};
@@ -99,18 +98,19 @@ public class ProfileFragment extends Fragment {
         uid = user.getUid();
 
         String searchKey1 = userEmail;
-        String searchKey2 = timeStamp;
-
+        String searchKey2 = df.format(timeInMillis);
         databaseRef = FirebaseDatabase.getInstance().getReference("Foods");
         databaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                    if (dataSnapshot1.child("email").exists() && dataSnapshot1.child("timeStamp").exists()) {
-                        if (dataSnapshot1.child("email").getValue().toString().equals(searchKey1) && dataSnapshot1.child("timeStamp").getValue().toString().equals(searchKey2)) {
+                    if (dataSnapshot1.child("email").exists() && dataSnapshot1.child("timeInMillis").exists()) {
+                        if (dataSnapshot1.child("email").getValue().toString().equals(searchKey1) && df.format(dataSnapshot1.child("timeInMillis").getValue()).equals(searchKey2)) {
 
                             dataSnapshot1.child("calories").getValue().toString();
                             cValue[0] += Integer.parseInt(String.valueOf(dataSnapshot1.child("calories").getValue()));
+
+                            Log.d(TAG, "email: " + userEmail + " cValue[0]: " + cValue[0]);
                         } else {
                         }
                     } else {
