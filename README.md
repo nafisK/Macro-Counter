@@ -2,17 +2,14 @@
 
 **Macro_Counter** will help users track their daily calories of protein, carbs, fats and other micro nutrients
 
-## Week 13 - User Stories
+## User Stories
 
-The following **required** functionality is completed:
+The followingfunctionality is completed:
 
 - [x] Finish Firebase Search Fragment. (Search Bar with Firebase)
 - [x] UI/UX fixes.
 - [x] Add Calorie Counter to Profile Fragment. (User info)
 - [x] Integrate builds (all of current activities and fragments)
-
-The following **optional** features are implemented:
-
 
 ## Video Walkthrough
 
@@ -21,10 +18,6 @@ Here's a walkthrough of implemented user stories:
 <img src="https://github.com/Codepath-Group-7/Macro_Counter/blob/master/Demo.gif" width=250><br>
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
-
-## Notes
-
-Describe any challenges encountered while building the app.
 
 ## Open-source libraries used
 
