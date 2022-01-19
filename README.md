@@ -1,6 +1,6 @@
 # Group Project - *Macro_Counter*
 
-**Macro_Counter** will help users track their daily calories of protein, carbs, fats and other micro nutrients
+Macro_Counter will help users track their daily calories of protein, carbs, fats and other micro nutrients
 
 ## User Stories
 
